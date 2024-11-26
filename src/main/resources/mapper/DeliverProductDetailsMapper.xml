@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.DeliverProductDetailsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.DeliverProductDetails">
+        <id column="id" property="id" />
+        <result column="purchase_apply_id" property="purchaseApplyId" />
+        <result column="deliver_goods_num" property="deliverGoodsNum" />
+        <result column="is_delivered" property="isDelivered" />
+        <result column="delivered_imgs" property="deliveredImgs" />
+        <result column="in_warehouse_sure" property="inWarehouseSure" />
+        <result column="real_product_num" property="realProductNum" />
+        <result column="not_eligible" property="notEligible" />
+        <result column="in_warehouse_num" property="inWarehouseNum" />
+        <result column="have_eligible" property="haveEligible" />
+        <result column="quality_time" property="qualityTime" />
+        <result column="quality_person" property="qualityPerson" />
+        <result column="quality_person_dep" property="qualityPersonDep" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, purchase_apply_id, deliver_goods_num, is_delivered, delivered_imgs, in_warehouse_sure, real_product_num, not_eligible, in_warehouse_num, have_eligible, quality_time, quality_person, quality_person_dep
+    </sql>
+
+</mapper>

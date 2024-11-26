@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.DeliverProductReviewMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.DeliverProductReview">
+        <result column="deliver_product_details_id" property="deliverProductDetailsId" />
+        <result column="qualified_ensure" property="qualifiedEnsure" />
+        <result column="imgs_id" property="imgsId" />
+        <result column="inwarehouse_time" property="inwarehouseTime" />
+        <result column="inwarehouse_person" property="inwarehousePerson" />
+        <result column="person_dep" property="personDep" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        deliver_product_details_id, qualified_ensure, imgs_id, inwarehouse_time, inwarehouse_person, person_dep
+    </sql>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.InputInvoiceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.InputInvoice">
+        <id column="id" property="id" />
+        <result column="purchase_order_id" property="purchaseOrderId" />
+        <result column="invoice_image" property="invoiceImage" />
+        <result column="payment_this_time" property="paymentThisTime" />
+        <result column="invoice_type" property="invoiceType" />
+        <result column="incoice_num" property="incoiceNum" />
+        <result column="incoice_time" property="incoiceTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, purchase_order_id, invoice_image, payment_this_time, invoice_type, incoice_num, incoice_time
+    </sql>
+
+</mapper>
