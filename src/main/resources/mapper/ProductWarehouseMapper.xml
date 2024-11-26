@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.ProductWarehouseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.ProductWarehouse">
+        <id column="id" property="id" />
+        <result column="product_show" property="productShow" />
+        <result column="enable" property="enable" />
+        <result column="enter_person" property="enterPerson" />
+        <result column="enter_time" property="enterTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_person" property="updatePerson" />
+        <result column="product_num" property="productNum" />
+        <result column="warehouse_id" property="warehouseId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, product_show, enable, enter_person, enter_time, update_time, update_person, product_num, warehouse_id
+    </sql>
+
+</mapper>

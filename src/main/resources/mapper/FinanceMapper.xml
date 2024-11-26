@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.FinanceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.Finance">
+        <id column="id" property="id" />
+        <result column="Invoice_header" property="invoiceHeader" />
+        <result column="tax_num" property="taxNum" />
+        <result column="tax_type" property="taxType" />
+        <result column="tax_rate" property="taxRate" />
+        <result column="bank" property="bank" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, Invoice_header, tax_num, tax_type, tax_rate, bank, enable
+    </sql>
+
+</mapper>

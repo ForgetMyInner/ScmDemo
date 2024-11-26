@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.PayPlanMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.PayPlan">
+        <id column="id" property="id" />
+        <result column="purchase_order_pay" property="purchaseOrderPay" />
+        <result column="purchase_proprtion" property="purchaseProprtion" />
+        <result column="purchase_method" property="purchaseMethod" />
+        <result column="purchase_date" property="purchaseDate" />
+        <result column="remark" property="remark" />
+        <result column="purchase_order_id" property="purchaseOrderId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, purchase_order_pay, purchase_proprtion, purchase_method, purchase_date, remark, purchase_order_id
+    </sql>
+
+</mapper>

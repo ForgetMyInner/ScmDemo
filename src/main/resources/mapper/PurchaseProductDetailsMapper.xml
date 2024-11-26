@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.PurchaseProductDetailsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.PurchaseProductDetails">
+        <id column="id" property="id" />
+        <result column="product_supplier_id" property="productSupplierId" />
+        <result column="purchase_num" property="purchaseNum" />
+        <result column="quote" property="quote" />
+        <result column="product_warehouse_id" property="productWarehouseId" />
+        <result column="purchase_apply_id" property="purchaseApplyId" />
+        <result column="total_price" property="totalPrice" />
+        <result column="purchase_num_real" property="purchaseNumReal" />
+        <result column="approval" property="approval" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, product_supplier_id, purchase_num, quote, product_warehouse_id, purchase_apply_id, total_price, purchase_num_real, approval
+    </sql>
+
+</mapper>

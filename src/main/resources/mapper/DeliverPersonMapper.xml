@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.DeliverPersonMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.DeliverPerson">
+        <id column="id" property="id" />
+        <result column="supplier_id" property="supplierId" />
+        <result column="shipper_name" property="shipperName" />
+        <result column="shipper_phone" property="shipperPhone" />
+        <result column="driver_name" property="driverName" />
+        <result column="driver_phone" property="driverPhone" />
+        <result column="car_num" property="carNum" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, supplier_id, shipper_name, shipper_phone, driver_name, driver_phone, car_num
+    </sql>
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.WarehouseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.Warehouse">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="address" property="address" />
+        <result column="capacity" property="capacity" />
+        <result column="nature" property="nature" />
+        <result column="company_department_id" property="companyDepartmentId" />
+        <result column="warehouse_leader" property="warehouseLeader" />
+        <result column="phone" property="phone" />
+        <result column="min_count" property="minCount" />
+        <result column="max_count" property="maxCount" />
+        <result column="product_management_id" property="productManagementId" />
+        <result column="instore_num" property="instoreNum" />
+        <result column="now_count" property="nowCount" />
+        <result column="rent" property="rent" />
+        <result column="end_time" property="endTime" />
+        <result column="stop" property="stop" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, code, address, capacity, nature, company_department_id, warehouse_leader, phone, min_count, max_count, product_management_id, instore_num, now_count, rent, end_time, stop, enable
+    </sql>
+
+</mapper>

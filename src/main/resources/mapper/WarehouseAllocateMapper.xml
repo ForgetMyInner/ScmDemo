@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.WarehouseAllocateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.WarehouseAllocate">
+        <id column="id" property="id" />
+        <result column="allocate_type" property="allocateType" />
+        <result column="allocate_date" property="allocateDate" />
+        <result column="allocate_expectation" property="allocateExpectation" />
+        <result column="apply_person_id" property="applyPersonId" />
+        <result column="apply_department" property="applyDepartment" />
+        <result column="allocate_code" property="allocateCode" />
+        <result column="out_warehouse" property="outWarehouse" />
+        <result column="in_warehouse" property="inWarehouse" />
+        <result column="allocate_product_money" property="allocateProductMoney" />
+        <result column="allocate_product_num" property="allocateProductNum" />
+        <result column="product_management_id" property="productManagementId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, allocate_type, allocate_date, allocate_expectation, apply_person_id, apply_department, allocate_code, out_warehouse, in_warehouse, allocate_product_money, allocate_product_num, product_management_id
+    </sql>
+
+</mapper>

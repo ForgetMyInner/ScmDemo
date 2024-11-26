@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.PurchaseOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.PurchaseOrder">
+        <id column="id" property="id" />
+        <result column="supplier_id" property="supplierId" />
+        <result column="purchase_order_name" property="purchaseOrderName" />
+        <result column="purchase_sign_date" property="purchaseSignDate" />
+        <result column="purchase_delivery_date" property="purchaseDeliveryDate" />
+        <result column="purchase_code" property="purchaseCode" />
+        <result column="department_id" property="departmentId" />
+        <result column="employee_id" property="employeeId" />
+        <result column="warehouse_id" property="warehouseId" />
+        <result column="purchase_order_img_id" property="purchaseOrderImgId" />
+        <result column="discount_amount" property="discountAmount" />
+        <result column="purchase_apply_id" property="purchaseApplyId" />
+        <result column="approval_status" property="approvalStatus" />
+        <result column="approval_time" property="approvalTime" />
+        <result column="approval_person_id" property="approvalPersonId" />
+        <result column="total_price" property="totalPrice" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, supplier_id, purchase_order_name, purchase_sign_date, purchase_delivery_date, purchase_code, department_id, employee_id, warehouse_id, purchase_order_img_id, discount_amount, purchase_apply_id, approval_status, approval_time, approval_person_id, total_price
+    </sql>
+
+</mapper>

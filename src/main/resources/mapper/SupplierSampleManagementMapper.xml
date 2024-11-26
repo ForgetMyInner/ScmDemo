@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.SupplierSampleManagementMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.SupplierSampleManagement">
+        <id column="id" property="id" />
+        <result column="supplier_id" property="supplierId" />
+        <result column="isnew" property="isnew" />
+        <result column="mailing_time" property="mailingTime" />
+        <result column="mailing_code" property="mailingCode" />
+        <result column="enter_person" property="enterPerson" />
+        <result column="enter_time" property="enterTime" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, supplier_id, isnew, mailing_time, mailing_code, enter_person, enter_time, enable
+    </sql>
+
+</mapper>
