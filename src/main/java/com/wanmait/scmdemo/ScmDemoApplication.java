@@ -9,6 +9,7 @@ public class ScmDemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(ScmDemoApplication.class, args);
         System.out.println("hello");
+        System.out.println("mazihao");
     }
 //    测试111
 
