@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
  * @since 2024-11-26
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class PurchaseProductDetailsServiceImpl extends ServiceImpl<PurchaseProductDetailsMapper, PurchaseProductDetails> implements PurchaseProductDetailsService {
 
 }

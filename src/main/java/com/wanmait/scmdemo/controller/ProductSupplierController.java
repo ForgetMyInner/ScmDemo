@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
  * @author wanmait
  * @since 2024-11-26
  */
-@Controller
+@RestController
 @RequestMapping("/productSupplier")
 public class ProductSupplierController {
 
