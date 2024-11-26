@@ -5,6 +5,7 @@ import com.wanmait.scmdemo.mapper.DeliverProductDetailsMapper;
 import com.wanmait.scmdemo.service.DeliverProductDetailsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
