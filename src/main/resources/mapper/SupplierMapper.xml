@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.SupplierMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.Supplier">
+        <id column="id" property="id" />
+        <result column="supplier_code" property="supplierCode" />
+        <result column="supplier_num" property="supplierNum" />
+        <result column="supplier_name" property="supplierName" />
+        <result column="supplier_type" property="supplierType" />
+        <result column="supplier_state" property="supplierState" />
+        <result column="supplier_address" property="supplierAddress" />
+        <result column="invoice_header" property="invoiceHeader" />
+        <result column="tax_num" property="taxNum" />
+        <result column="tax_type" property="taxType" />
+        <result column="tax_rate" property="taxRate" />
+        <result column="bank" property="bank" />
+        <result column="bank_num" property="bankNum" />
+        <result column="contactinfo_id" property="contactinfoId" />
+        <result column="attachment_id" property="attachmentId" />
+        <result column="enter_time" property="enterTime" />
+        <result column="enter_person" property="enterPerson" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_person" property="updatePerson" />
+        <result column="remark" property="remark" />
+        <result column="stop" property="stop" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, supplier_code, supplier_num, supplier_name, supplier_type, supplier_state, supplier_address, invoice_header, tax_num, tax_type, tax_rate, bank, bank_num, contactinfo_id, attachment_id, enter_time, enter_person, update_time, update_person, remark, stop, enable
+    </sql>
+
+</mapper>

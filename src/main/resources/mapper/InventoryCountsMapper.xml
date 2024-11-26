@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.InventoryCountsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.InventoryCounts">
+        <id column="id" property="id" />
+        <result column="inventory_type" property="inventoryType" />
+        <result column="inventory_code" property="inventoryCode" />
+        <result column="inventory_date" property="inventoryDate" />
+        <result column="inventory_end_date" property="inventoryEndDate" />
+        <result column="inventory_person" property="inventoryPerson" />
+        <result column="inventory_department" property="inventoryDepartment" />
+        <result column="inventory_warehouse_id" property="inventoryWarehouseId" />
+        <result column="product_management_id" property="productManagementId" />
+        <result column="inventory_loss" property="inventoryLoss" />
+        <result column="inventory_win" property="inventoryWin" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, inventory_type, inventory_code, inventory_date, inventory_end_date, inventory_person, inventory_department, inventory_warehouse_id, product_management_id, inventory_loss, inventory_win
+    </sql>
+
+</mapper>
