@@ -10,4 +10,10 @@ class ScmDemoApplicationTests {
     void contextLoads() {
     }
 
+    @Test
+    public void testfenzhi()
+    {
+        System.out.println("创建分支");
+    }
+
 }
