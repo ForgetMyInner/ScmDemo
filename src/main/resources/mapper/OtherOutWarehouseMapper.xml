@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.OtherOutWarehouseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.OtherOutWarehouse">
+        <id column="id" property="id" />
+        <result column="other_out_warehouse" property="otherOutWarehouse" />
+        <result column="warehouser_id" property="warehouserId" />
+        <result column="other_out_warehouse_code" property="otherOutWarehouseCode" />
+        <result column="product_management_id" property="productManagementId" />
+        <result column="other_out_warehouse_num" property="otherOutWarehouseNum" />
+        <result column="ohter_out_warehouse_money" property="ohterOutWarehouseMoney" />
+        <result column="out_warehouse_confirm" property="outWarehouseConfirm" />
+        <result column="other_warehouse_imgs_id" property="otherWarehouseImgsId" />
+        <result column="other_warehouse_date" property="otherWarehouseDate" />
+        <result column="out_warehouse_person" property="outWarehousePerson" />
+        <result column="person_department" property="personDepartment" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, other_out_warehouse, warehouser_id, other_out_warehouse_code, product_management_id, other_out_warehouse_num, ohter_out_warehouse_money, out_warehouse_confirm, other_warehouse_imgs_id, other_warehouse_date, out_warehouse_person, person_department
+    </sql>
+
+</mapper>

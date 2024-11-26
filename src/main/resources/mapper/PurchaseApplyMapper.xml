@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.PurchaseApplyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.PurchaseApply">
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="employee_id" property="employeeId" />
+        <result column="enter_time" property="enterTime" />
+        <result column="delivery_demand_time" property="deliveryDemandTime" />
+        <result column="warehouse_id" property="warehouseId" />
+        <result column="source" property="source" />
+        <result column="remark" property="remark" />
+        <result column="all_price" property="allPrice" />
+        <result column="approval_status" property="approvalStatus" />
+        <result column="approval_time" property="approvalTime" />
+        <result column="approval_person_id" property="approvalPersonId" />
+        <result column="rfq_quote" property="rfqQuote" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, code, employee_id, enter_time, delivery_demand_time, warehouse_id, source, remark, all_price, approval_status, approval_time, approval_person_id, rfq_quote
+    </sql>
+
+</mapper>

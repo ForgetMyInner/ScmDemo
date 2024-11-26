@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.ProductOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.ProductOrder">
+        <id column="id" property="id" />
+        <result column="product_code" property="productCode" />
+        <result column="product_name" property="productName" />
+        <result column="product_brand" property="productBrand" />
+        <result column="product_attribute" property="productAttribute" />
+        <result column="product_type" property="productType" />
+        <result column="product_models" property="productModels" />
+        <result column="priduct_unit" property="priductUnit" />
+        <result column="purchase_permissions" property="purchasePermissions" />
+        <result column="product_imgs_id" property="productImgsId" />
+        <result column="presented_permissions" property="presentedPermissions" />
+        <result column="product_unit_price" property="productUnitPrice" />
+        <result column="sale_permissions" property="salePermissions" />
+        <result column="sample_product_num" property="sampleProductNum" />
+        <result column="total_price" property="totalPrice" />
+        <result column="sample_product_price" property="sampleProductPrice" />
+        <result column="historical_quotes" property="historicalQuotes" />
+        <result column="purchase_num" property="purchaseNum" />
+        <result column="ifneed_quote" property="ifneedQuote" />
+        <result column="enable" property="enable" />
+        <result column="enter_person" property="enterPerson" />
+        <result column="enter_time" property="enterTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_person" property="updatePerson" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, product_code, product_name, product_brand, product_attribute, product_type, product_models, priduct_unit, purchase_permissions, product_imgs_id, presented_permissions, product_unit_price, sale_permissions, sample_product_num, total_price, sample_product_price, historical_quotes, purchase_num, ifneed_quote, enable, enter_person, enter_time, update_time, update_person
+    </sql>
+
+</mapper>

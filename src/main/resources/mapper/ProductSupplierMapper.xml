@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.ProductSupplierMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.ProductSupplier">
+        <id column="id" property="id" />
+        <result column="product_show_id" property="productShowId" />
+        <result column="supplier_id" property="supplierId" />
+        <result column="product_unit_price" property="productUnitPrice" />
+        <result column="product_price" property="productPrice" />
+        <result column="discount_rate" property="discountRate" />
+        <result column="tax" property="tax" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, product_show_id, supplier_id, product_unit_price, product_price, discount_rate, tax
+    </sql>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.SupplierDeliverGoodsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.SupplierDeliverGoods">
+        <id column="id" property="id" />
+        <result column="purchase_order_id" property="purchaseOrderId" />
+        <result column="deliver_person_id" property="deliverPersonId" />
+        <result column="deliver_code" property="deliverCode" />
+        <result column="deliver_date" property="deliverDate" />
+        <result column="plan_arrival_date" property="planArrivalDate" />
+        <result column="arrival_date" property="arrivalDate" />
+        <result column="arrival_imgs_id" property="arrivalImgsId" />
+        <result column="sure" property="sure" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, purchase_order_id, deliver_person_id, deliver_code, deliver_date, plan_arrival_date, arrival_date, arrival_imgs_id, sure
+    </sql>
+
+</mapper>
