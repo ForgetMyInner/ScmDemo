@@ -3,8 +3,7 @@ package com.wanmait.scmdemo.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.math.BigDecimal;
 import java.util.Date;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
@@ -15,8 +14,7 @@ import lombok.experimental.Accessors;
  * @author wanmait
  * @since 2024-11-26
  */
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
 @TableName("warehouse_allocate")
 public class WarehouseAllocate {
