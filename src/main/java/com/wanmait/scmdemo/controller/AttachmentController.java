@@ -2,6 +2,7 @@ package com.wanmait.scmdemo.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Controller;
  * @author wanmait
  * @since 2024-11-26
  */
-@Controller
+@RestController
 @RequestMapping("/attachment")
 public class AttachmentController {
 

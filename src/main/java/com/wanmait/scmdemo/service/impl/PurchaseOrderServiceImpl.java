@@ -5,6 +5,7 @@ import com.wanmait.scmdemo.mapper.PurchaseOrderMapper;
 import com.wanmait.scmdemo.service.PurchaseOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2024-11-26
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, PurchaseOrder> implements PurchaseOrderService {
 
 }

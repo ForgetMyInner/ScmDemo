@@ -5,6 +5,7 @@ import com.wanmait.scmdemo.mapper.QualificationinfoMapper;
 import com.wanmait.scmdemo.service.QualificationinfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2024-11-26
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class QualificationinfoServiceImpl extends ServiceImpl<QualificationinfoMapper, Qualificationinfo> implements QualificationinfoService {
 
 }
