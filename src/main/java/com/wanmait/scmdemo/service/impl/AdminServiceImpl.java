@@ -5,6 +5,9 @@ import com.wanmait.scmdemo.mapper.AdminMapper;
 import com.wanmait.scmdemo.service.AdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
  * @since 2024-11-26
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
 
 }

@@ -5,6 +5,7 @@ import com.wanmait.scmdemo.mapper.ScmDictTypeMapper;
 import com.wanmait.scmdemo.service.ScmDictTypeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2024-11-26
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ScmDictTypeServiceImpl extends ServiceImpl<ScmDictTypeMapper, ScmDictType> implements ScmDictTypeService {
 
 }
