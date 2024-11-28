@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.SupplierEnterRuleDataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.SupplierEnterRuleData">
+        <id column="id" property="id" />
+        <result column="enter_rule_id" property="enterRuleId" />
+        <result column="rules" property="rules" />
+        <result column="max_score" property="maxScore" />
+        <result column="total_score" property="totalScore" />
+        <result column="score" property="score" />
+        <result column="remark" property="remark" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, enter_rule_id, rules, max_score, total_score, score, remark, enable
+    </sql>
+
+</mapper>
