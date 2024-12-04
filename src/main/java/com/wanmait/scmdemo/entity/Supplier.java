@@ -3,7 +3,10 @@ package com.wanmait.scmdemo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.util.Date;
+
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -12,7 +15,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author wanmait
- * @since 2024-11-26
+ * @since 2024-12-04
  */
 @Data
 @Accessors(chain = true)
@@ -125,4 +128,6 @@ public class Supplier {
      * 删除：1可用
      */
     private Boolean enable;
+
+    private Integer cityId;
 }

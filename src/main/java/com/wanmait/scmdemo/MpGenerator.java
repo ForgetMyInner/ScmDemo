@@ -46,9 +46,9 @@ public class MpGenerator {
                     .enableBaseColumnList()
                     .build();
                     //不设置下面两项则生成全部的表
-                    //builder.addInclude("log"); // 设置需要生成的表名
+                    //builder.addInclude("province"); // 设置需要生成的表名
                     //builder.addExclude("province");//除了admin之外其它的都生成
-                    //builder.addInclude("question","userinfo","question_type");
+                    //builder.addInclude("supplier");
                     //builder.addInclude("login_log");
                     //builder.addInclude("province");
                     //builder.addInclude("question","question_type");
