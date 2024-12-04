@@ -26,11 +26,12 @@
         <result column="remark" property="remark" />
         <result column="stop" property="stop" />
         <result column="enable" property="enable" />
+        <result column="city_id" property="cityId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, supplier_code, supplier_num, supplier_name, supplier_type, supplier_state, supplier_address, invoice_header, tax_num, tax_type, tax_rate, bank, bank_num, contactinfo_id, attachment_id, enter_time, enter_person, update_time, update_person, remark, stop, enable
+        id, supplier_code, supplier_num, supplier_name, supplier_type, supplier_state, supplier_address, invoice_header, tax_num, tax_type, tax_rate, bank, bank_num, contactinfo_id, attachment_id, enter_time, enter_person, update_time, update_person, remark, stop, enable, city_id
     </sql>
 
 </mapper>
