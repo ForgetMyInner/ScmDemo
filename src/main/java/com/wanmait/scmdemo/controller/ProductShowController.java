@@ -2,13 +2,17 @@ package com.wanmait.scmdemo.controller;
 
 import com.wanmait.scmdemo.entity.ProductShow;
 import com.wanmait.scmdemo.service.ProductShowService;
+import com.wanmait.scmdemo.util.AjaxResult;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * <p>
@@ -23,14 +27,23 @@ import java.util.List;
 public class ProductShowController {
     @Autowired
     private ProductShowService productShowService;
-    @RequestMapping("/product/list")
-    public List<ProductShow> getProductShow(){
-        return productShowService.list();
-    }
+
     @RequestMapping(value = "/product/add", method = RequestMethod.POST)
-    public String addProductShow(@RequestBody ProductShow productShow) {
+    public AjaxResult addProductShow(@RequestBody ProductShow productShow) {
         System.out.println("添加产品测试");
         productShowService.save(productShow);
-        return "redirect:/manage/product/add";
+        return AjaxResult.success("");
+    }
+
+    @PostMapping("/product/uploadPic")
+    public AjaxResult uploadPic(MultipartFile file){
+        try{
+            String path= ResourceUtils.getURL("classpath:").getPath()+"static/uploadImages";
+            String fileName = UUID.randomUUID().toString().replaceAll("-","")+"."+ FilenameUtils.getExtension(file.getOriginalFilename());
+            file.transferTo(new File(path,fileName));
+            return AjaxResult.success("上传成功").put("fileName",fileName);
+        }catch (IOException e){
+            return AjaxResult.error(e.getMessage());
+        }
     }
 }
