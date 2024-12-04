@@ -5,7 +5,6 @@ import com.wanmait.scmdemo.mapper.SupplierMapper;
 import com.wanmait.scmdemo.service.SupplierService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -13,10 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
  * </p>
  *
  * @author wanmait
- * @since 2024-11-26
+ * @since 2024-12-04
  */
 @Service
-@Transactional(rollbackFor = Exception.class)
 public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> implements SupplierService {
 
 }

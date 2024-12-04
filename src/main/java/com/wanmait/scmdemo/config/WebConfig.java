@@ -28,12 +28,13 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 //是否允许传递凭证，默认false,前后端分离时，不能传送cookie，session也就用不了
                 //如果设为true，可以传送cookie，前端axios要配合设置：xhr.withCredentials=true
-                //.allowCredentials(true)
+//                .allowCredentials(true)
                 //预检请求的缓存时间，2小时之内如果发送复杂请求不用先发预检请求
                 .maxAge(60*60*2);
     }
 
     @Override
+
     public void addInterceptors(InterceptorRegistry registry) {
         //registry.addInterceptor(demoInterceptor).addPathPatterns("/manage/**").excludePathPatterns("/manage/login","/manage/test");
         registry.addInterceptor(jwtInterceptor).addPathPatterns("/manage/**").excludePathPatterns("/manage/login");
