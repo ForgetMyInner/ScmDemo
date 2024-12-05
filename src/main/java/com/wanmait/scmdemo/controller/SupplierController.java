@@ -21,13 +21,18 @@ public class SupplierController {
     @Resource
     private SupplierService supplierService;
 
-    @GetMapping("list")
+    @GetMapping("/list")
     public AjaxResult list(){
         return AjaxResult.success("查询成功").put("name","mazihao").put("suppliers",supplierService.list());
     }
-    @PostMapping("add")
+    @PostMapping("/add")
     public AjaxResult add(@RequestBody Supplier supplier){
-       // supplierService.save()
-        return AjaxResult.success("");
+        if (supplier.getId()!=null){
+            supplierService.updateById(supplier);
+            return AjaxResult.success("更新成功",supplier);
+        }else {
+            supplierService.save(supplier);
+            return AjaxResult.success("添加成功");
+        }
     }
 }

@@ -14,6 +14,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +34,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Configuration
-//@EnableCaching //启用注解缓存 @Cachable注解添加缓存 @CacheEvict删除缓存
+@EnableCaching //启用注解缓存 @Cachable注解添加缓存 @CacheEvict删除缓存
 public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
