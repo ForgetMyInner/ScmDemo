@@ -21,14 +21,11 @@ import java.util.Map;
 
 /**
  * <p>
- * 管理员用户表 服务实现类
- * </p>
- *
- * @author wanmait
- * @since 2024-11-26
+ @@ -18,7 +28,54 @@ import javax.annotation.Resource;
+  * @since 2024-11-26
  */
 @Service
-@Transactional(rollbackFor=Exception.class)
+@Transactional(rollbackFor = Exception.class)
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
 
     @Resource

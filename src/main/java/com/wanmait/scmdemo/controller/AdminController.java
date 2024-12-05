@@ -1,5 +1,7 @@
 package com.wanmait.scmdemo.controller;
 
+import com.wanmait.scmdemo.entity.Admin;
+import com.wanmait.scmdemo.util.AjaxResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
