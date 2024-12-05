@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -100,7 +102,14 @@ public class Warehouse {
     /**
      * 仓库状态：是否可用    1可用
      */
-    private Boolean stop;
 
-    private Boolean enable;
+//    //默认的value为0表示可用,1为删除,需手动设置
+//    @TableLogic(value = "1",delval = "0")
+//    private Boolean stop;
+        private Boolean stop;
+//
+//    //默认的value为0表示可用,1为删除,需手动设置
+//    @TableLogic(value = "1",delval = "0")
+//    private Boolean enable;
+        private Boolean enable;
 }
