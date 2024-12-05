@@ -2,6 +2,7 @@ package com.wanmait.scmdemo.service;
 
 import com.wanmait.scmdemo.entity.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wanmait.scmdemo.util.AjaxResult;
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-11-26
  */
 public interface AdminService extends IService<Admin> {
-
+    AjaxResult login(Admin admin);
 }
