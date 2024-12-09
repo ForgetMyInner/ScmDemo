@@ -13,7 +13,7 @@ public class ScmDictDataServiceTest {
     private ScmDictDataService scmDictDataService;
     @Test
     public void testList(){
-        List<ScmDictData> list = scmDictDataService.list("supplier_level");
+        List<ScmDictData> list = scmDictDataService.list("other_out_warehouse");
         list.forEach(System.out::println);
     }
 }

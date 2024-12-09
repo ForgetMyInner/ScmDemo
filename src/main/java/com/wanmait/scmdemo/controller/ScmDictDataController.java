@@ -1,15 +1,15 @@
 package com.wanmait.scmdemo.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.wanmait.scmdemo.entity.ScmDictData;
+import com.wanmait.scmdemo.entity.Supplier;
 import com.wanmait.scmdemo.service.ScmDictDataService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.wanmait.scmdemo.util.AjaxResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * <p>
@@ -20,19 +20,13 @@ import java.util.List;
  * @since 2024-11-26
  */
 @RestController
-@RequestMapping("/scmDictData")
+@RequestMapping("/manage/scmDictData")
 public class ScmDictDataController {
-    @Autowired
+    @Resource
     private ScmDictDataService scmDictDataService;
-
-
-//    查询数据库字典
-    @GetMapping("/getDictData")
-    public List<ScmDictData> getDictDataByLabel(String dictType/*从前端传查询条件*/) {
-        LambdaQueryWrapper<ScmDictData> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(ScmDictData::getDictType, dictType);
-        queryWrapper.select(ScmDictData::getDictLabel, ScmDictData::getDictCode);
-        System.out.println("查询结果："+ scmDictDataService.list(queryWrapper));
-        return scmDictDataService.list(queryWrapper);
+    @GetMapping("/dictDataList")
+    public AjaxResult list(String dataType){
+        return AjaxResult.success("查询成功").put("dataType",scmDictDataService.list(dataType));
     }
+
 }
