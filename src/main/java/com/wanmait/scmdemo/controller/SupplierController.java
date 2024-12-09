@@ -1,11 +1,14 @@
 package com.wanmait.scmdemo.controller;
 
+import com.wanmait.scmdemo.entity.ScmDictType;
 import com.wanmait.scmdemo.entity.Supplier;
+import com.wanmait.scmdemo.service.ScmDictDataService;
 import com.wanmait.scmdemo.service.SupplierService;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * <p>
@@ -20,6 +23,8 @@ import javax.annotation.Resource;
 public class SupplierController {
     @Resource
     private SupplierService supplierService;
+    @Resource
+    private ScmDictDataService scmDictDataService;
 
     @GetMapping("/list")
     public AjaxResult list(){
