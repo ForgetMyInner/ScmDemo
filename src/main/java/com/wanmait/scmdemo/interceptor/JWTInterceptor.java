@@ -40,19 +40,19 @@ public class JWTInterceptor implements HandlerInterceptor {
             throw new JWTVerificationException("请求头中没有携带token");
         }
         //验证token
-//        Integer adminId = null;
-//        try {
-//            adminId = Integer.parseInt(JWTUtils.getAudience(token));
-//        } catch (NumberFormatException e) {
-//            throw new JWTVerificationException("token信息不正确");
-//        }
-//        Admin admin = adminService.getById(adminId);
-        Admin admin = (Admin)redisTemplate.opsForValue().get("token:"+token);
+        Integer adminId = null;
+        try {
+            adminId = Integer.parseInt(JWTUtils.getAudience(token));
+        } catch (NumberFormatException e) {
+            throw new JWTVerificationException("token信息不正确");
+        }
+        Admin admin = adminService.getById(adminId);
+//        Admin admin = (Admin)redisTemplate.opsForValue().get("token:"+token);
         if(admin==null){
             throw new JWTVerificationException("token信息不正确,没有查询到对应的用户");
         }
         JWTUtils.verifyToken(token,admin.getPassword());
-        request.setAttribute("admin",admin);
+//        request.setAttribute("admin",admin);
         return true;
     }
 }
