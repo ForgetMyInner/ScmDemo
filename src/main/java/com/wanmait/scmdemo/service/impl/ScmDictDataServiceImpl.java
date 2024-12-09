@@ -26,7 +26,7 @@ public class ScmDictDataServiceImpl extends ServiceImpl<ScmDictDataMapper, ScmDi
 @Resource
 private ScmDictDataMapper scmDictDataMapper;
 
-    @Cacheable(value = "commonCache",key = "'dictType:'+#dictType")
+    @Cacheable(value = "commonCache",key = "'dictType:'+#scmDictType")
     @Override
     public List<ScmDictData> list(String scmDictType) {
         LambdaQueryWrapper<ScmDictData> lambdaQueryWrapper = new LambdaQueryWrapper<>();
