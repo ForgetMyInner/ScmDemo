@@ -9,11 +9,11 @@ import java.util.Collections;
 
 public class MpGenerator {
     public static void main(String[] args) throws InterruptedException {
-        String url = "jdbc:mysql://localhost:3306/scm_db?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
+        String url = "jdbc:mysql://database-1.cpeweeis2sdg.rds.cn-north-1.amazonaws.com.cn:3306/wm240612db1?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
         String projectPath = System.getProperty("user.dir");
         String outputDir = projectPath + "/src/main/java";
         String mapperxmlPath = projectPath+"/src/main/resources/mapper/";
-        FastAutoGenerator.create(url, "root", "wanmait")
+        FastAutoGenerator.create(url, "wm240612user1", "wanmait_E3c8Cs1")
                 .globalConfig(builder -> {
                     builder.author("wanmait") // 设置作者
                             //.enableSwagger() // 开启 swagger 模式
@@ -46,7 +46,7 @@ public class MpGenerator {
                     .enableBaseColumnList()
                     .build();
                     //不设置下面两项则生成全部的表
-                    //builder.addInclude("province"); // 设置需要生成的表名
+                    builder.addInclude("supplier_enter_rule"); // 设置需要生成的表名
                     //builder.addExclude("province");//除了admin之外其它的都生成
                     //builder.addInclude("supplier");
                     //builder.addInclude("login_log");

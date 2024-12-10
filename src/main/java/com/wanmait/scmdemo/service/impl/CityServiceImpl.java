@@ -32,7 +32,8 @@ public class CityServiceImpl extends ServiceImpl<CityMapper, City> implements Ci
     private ProvinceMapper provinceMapper;
     @Resource
     private CityMapper cityMapper;
-    @Cacheable(value = "commonCache",key = "'ProvinceCityCascade:'+#ProvinceCityCascade")
+
+    @Cacheable(value = "commonCache", key = "'ProvinceCityCascade:'+#ProvinceCityCascade")
     @Override
     public List<Map<String, Object>> getProvinceCityCascadeData() {
         List<Province> provinces = provinceMapper.selectList(null);
