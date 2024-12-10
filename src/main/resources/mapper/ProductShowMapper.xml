@@ -29,4 +29,7 @@
         id, product_code, product_name, product_brand, product_attribute, product_type, product_models, priduct_unit, purchase_permissions, product_imgs_id, presented_permissions, product_unit_price, sale_permissions, enable, enter_person, enter_time, update_time, update_person
     </sql>
 
+    <select id="existsByProductCode" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM product_show WHERE product_code = #{productCode}
+    </select>
 </mapper>

@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2024-11-26
  */
 public interface ProductShowMapper extends BaseMapper<ProductShow> {
-
+//    检查编码是否唯一
+    boolean existsByProductCode(String productCode);
 }
