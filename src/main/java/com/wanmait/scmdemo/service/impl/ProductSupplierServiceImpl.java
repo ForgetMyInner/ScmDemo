@@ -1,11 +1,16 @@
 package com.wanmait.scmdemo.service.impl;
 
+import com.wanmait.scmdemo.entity.ProductShow;
 import com.wanmait.scmdemo.entity.ProductSupplier;
+import com.wanmait.scmdemo.mapper.ProductShowMapper;
 import com.wanmait.scmdemo.mapper.ProductSupplierMapper;
 import com.wanmait.scmdemo.service.ProductSupplierService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 /**
  * <p>

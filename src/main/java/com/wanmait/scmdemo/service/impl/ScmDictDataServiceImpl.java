@@ -1,11 +1,16 @@
 package com.wanmait.scmdemo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanmait.scmdemo.entity.ScmDictData;
 import com.wanmait.scmdemo.mapper.ScmDictDataMapper;
 import com.wanmait.scmdemo.service.ScmDictDataService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -18,5 +23,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class ScmDictDataServiceImpl extends ServiceImpl<ScmDictDataMapper, ScmDictData> implements ScmDictDataService {
+@Resource
+private ScmDictDataMapper scmDictDataMapper;
+
+    @Cacheable(value = "commonCache",key = "'dictType:'+#scmDictType")
+    @Override
+    public List<ScmDictData> list(String scmDictType) {
+        LambdaQueryWrapper<ScmDictData> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(ScmDictData::getDictType,scmDictType);
+        lambdaQueryWrapper.select(ScmDictData::getDictCode,ScmDictData::getDictType,ScmDictData::getDictValue,ScmDictData::getDictLabel);
+        return scmDictDataMapper.selectList(lambdaQueryWrapper);
+    }
 
 }

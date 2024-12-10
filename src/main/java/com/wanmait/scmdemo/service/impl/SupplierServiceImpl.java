@@ -13,10 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
  * </p>
  *
  * @author wanmait
- * @since 2024-11-26
+ * @since 2024-12-04
  */
 @Service
-@Transactional(rollbackFor = Exception.class)
+@Transactional(rollbackFor=Exception.class)
 public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> implements SupplierService {
+
 
 }

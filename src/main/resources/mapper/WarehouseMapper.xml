@@ -29,4 +29,8 @@
         id, name, code, address, capacity, nature, company_department_id, warehouse_leader, phone, min_count, max_count, product_management_id, instore_num, now_count, rent, end_time, stop, enable
     </sql>
 
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include> from warehouse
+    </select>
 </mapper>
