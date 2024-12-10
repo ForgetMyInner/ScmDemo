@@ -31,7 +31,6 @@ public class ProductShowController {
     private ProductShowService productShowService;
     @GetMapping("/product/list")
     public AjaxResult getProductShow(){
-
         return AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShowService.list());
     }
     @RequestMapping(value = "/product/add", method = RequestMethod.POST)
@@ -44,12 +43,15 @@ public class ProductShowController {
     @PostMapping("/product/uploadPic")
     public AjaxResult uploadPic(MultipartFile file){
         try{
-            String path= ResourceUtils.getURL("classpath:").getPath()+"static/uploadImages";
-            String fileName = UUID.randomUUID().toString().replaceAll("-","")+"."+ FilenameUtils.getExtension(file.getOriginalFilename());
+            //检查大小和类型
+            String path=ResourceUtils.getURL("classpath:").getPath()+"static/uploadImage";
+            String fileName =UUID.randomUUID().toString().replaceAll("-","")+"."+FilenameUtils.getExtension(file.getOriginalFilename());
             file.transferTo(new File(path,fileName));
-            return AjaxResult.success("上传成功").put("fileName",fileName);
+            return  AjaxResult.success("上传成功").put("fileName",fileName);
         }catch (IOException e){
-            return AjaxResult.error(e.getMessage());
+            e.printStackTrace();
+            return AjaxResult.error("上传失败");
         }
+
     }
 }
