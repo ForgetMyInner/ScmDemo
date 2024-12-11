@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2024-11-26
  */
 @RestController
-@RequestMapping("/scmDictData")
+@RequestMapping("/manage/scmDictData")
 public class ScmDictDataController {
     @Resource
     private ScmDictDataService scmDictDataService;

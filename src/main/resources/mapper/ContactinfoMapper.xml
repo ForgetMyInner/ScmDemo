@@ -9,14 +9,14 @@
         <result column="job" property="job" />
         <result column="phone" property="phone" />
         <result column="email" property="email" />
-        <result column="import" property="import" />
+        <result column="is_important" property="isImportant" />
         <result column="supplier_id" property="supplierId" />
         <result column="enable" property="enable" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, job, phone, email, import, supplier_id, enable
+        id, name, job, phone, email, is_important, supplier_id, enable
     </sql>
 
 </mapper>
