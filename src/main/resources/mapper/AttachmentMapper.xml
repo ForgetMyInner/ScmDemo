@@ -9,11 +9,12 @@
         <result column="type" property="type" />
         <result column="supplier_id" property="supplierId" />
         <result column="enable" property="enable" />
+        <result column="upFileName" property="upFileName" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, type, supplier_id, enable
+        id, name, type, supplier_id, enable, upFileName
     </sql>
 
 </mapper>

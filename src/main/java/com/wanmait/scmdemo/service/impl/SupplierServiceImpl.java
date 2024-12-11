@@ -1,11 +1,19 @@
 package com.wanmait.scmdemo.service.impl;
 
-import com.wanmait.scmdemo.entity.Supplier;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.wanmait.scmdemo.entity.*;
+import com.wanmait.scmdemo.mapper.AttachmentMapper;
+import com.wanmait.scmdemo.mapper.ContactinfoMapper;
+import com.wanmait.scmdemo.mapper.QualificationinfoMapper;
 import com.wanmait.scmdemo.mapper.SupplierMapper;
 import com.wanmait.scmdemo.service.SupplierService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wanmait.scmdemo.util.AjaxResult;
+import com.wanmait.scmdemo.util.GYSCodeGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -18,6 +26,34 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor=Exception.class)
 public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> implements SupplierService {
+    @Resource
+    private SupplierMapper supplierMapper;
+    @Resource
+    private ContactinfoMapper contactinfoMapper;
+    @Resource
+    private AttachmentMapper attachmentMapper;
 
+    @Override
+    public AjaxResult register(SupplierDTO dto) {
+        //供应商准入注册
+        Supplier supplier = dto.getSupplier();
+        supplier.setSupplierCode(GYSCodeGenerator.generateCode());
+        supplier.setSupplierNum(GYSCodeGenerator.generateEntryCode());
+        supplierMapper.insert(supplier);
+        //联系人信息
+        Integer id = supplier.getId();
+        Contactinfo contactinfo = dto.getContactinfo();
+        contactinfo.setSupplierId(id);
+        contactinfoMapper.insert(contactinfo);
+        Integer id1 = contactinfo.getId();
+        //附件信息
+        Attachment attachment = dto.getAttachment();
+        attachment.setSupplierId(id);
+        attachmentMapper.insert(attachment);
 
+        System.out.println(dto.getSupplier());
+        System.out.println(dto.getContactinfo());
+        System.out.println(dto.getAttachment());
+        return AjaxResult.success("成功录入");
+    }
 }

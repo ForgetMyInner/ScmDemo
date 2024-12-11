@@ -1,5 +1,7 @@
 package com.wanmait.scmdemo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -20,6 +22,7 @@ public class DeliverProductReview {
     /**
      * 送货明细表id
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer deliverProductDetailsId;
 
     /**
