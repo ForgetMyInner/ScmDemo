@@ -46,7 +46,8 @@ public class MpGenerator {
                     .enableBaseColumnList()
                     .build();
                     //不设置下面两项则生成全部的表
-                    builder.addInclude("supplier_enter_rule"); // 设置需要生成的表名
+                    builder.addInclude("attachment"); // 设置需要生成的表名
+                    builder.addInclude("contactinfo");
                     //builder.addExclude("province");//除了admin之外其它的都生成
                     //builder.addInclude("supplier");
                     //builder.addInclude("login_log");
