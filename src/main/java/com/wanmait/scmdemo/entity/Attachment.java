@@ -3,6 +3,8 @@ package com.wanmait.scmdemo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -11,7 +13,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author wanmait
- * @since 2024-11-26
+ * @since 2024-12-10
  */
 @Data
 @Accessors(chain = true)
@@ -39,4 +41,9 @@ public class Attachment {
      * （0删除 ）
      */
     private Boolean enable;
+
+    /**
+     * 证书文件
+     */
+    private String upFileName;
 }
