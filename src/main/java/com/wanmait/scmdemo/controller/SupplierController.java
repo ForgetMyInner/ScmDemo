@@ -1,5 +1,6 @@
 package com.wanmait.scmdemo.controller;
 
+import com.wanmait.scmdemo.aop.LogInfo;
 import com.wanmait.scmdemo.entity.ScmDictType;
 import com.wanmait.scmdemo.entity.Supplier;
 import com.wanmait.scmdemo.entity.SupplierDTO;
@@ -33,9 +34,16 @@ public class SupplierController {
     @Resource
     private ScmDictDataService scmDictDataService;
 
+    //查询所有
+
     @GetMapping("/list")
     public AjaxResult list(){
         return AjaxResult.success("查询成功").put("name","mazihao").put("suppliers",supplierService.list());
+    }
+    //查询注册供应商
+    @GetMapping("/regList")
+    public AjaxResult regList(){
+        return  AjaxResult.success();
     }
 
     @PostMapping("uploadPic")
