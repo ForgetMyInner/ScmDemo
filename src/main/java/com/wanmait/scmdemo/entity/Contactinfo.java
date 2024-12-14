@@ -30,7 +30,7 @@ public class Contactinfo {
     /**
      * 职位
      */
-    private Integer job;
+    private String job;
 
     /**
      * 联系人电话

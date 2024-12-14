@@ -1,6 +1,7 @@
 package com.wanmait.scmdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.wanmait.scmdemo.aop.LogInfo;
 import com.wanmait.scmdemo.entity.*;
 import com.wanmait.scmdemo.mapper.AttachmentMapper;
 import com.wanmait.scmdemo.mapper.ContactinfoMapper;
@@ -12,8 +13,12 @@ import com.wanmait.scmdemo.util.AjaxResult;
 import com.wanmait.scmdemo.util.GYSCodeGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -33,12 +38,24 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
     @Resource
     private AttachmentMapper attachmentMapper;
 
+    //供应商信息录入
+    @LogInfo("供应商信息录入")
     @Override
     public AjaxResult register(SupplierDTO dto) {
+        //获取操作管理员
+        ServletRequestAttributes requestAttributes=(ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
+        HttpServletRequest request = requestAttributes.getRequest();
+        Admin admin = (Admin) request.getAttribute("admin");
+        System.out.println(admin.getUsername());
+
         //供应商准入注册
         Supplier supplier = dto.getSupplier();
         supplier.setSupplierCode(GYSCodeGenerator.generateCode());
         supplier.setSupplierNum(GYSCodeGenerator.generateEntryCode());
+        if (admin!=null){
+            supplier.setEnterPerson(admin.getUsername());
+        }
+
         supplierMapper.insert(supplier);
         //联系人信息
         Integer id = supplier.getId();
@@ -56,4 +73,13 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
         System.out.println(dto.getAttachment());
         return AjaxResult.success("成功录入");
     }
+
+    @Override
+    public AjaxResult findBySupplierState() {
+        LambdaQueryWrapper<Supplier>  supplierLambdaQueryWrapper= new LambdaQueryWrapper<>();
+        supplierLambdaQueryWrapper.eq(Supplier::getSupplierState,"潜在供应商");
+        List<Supplier> suppliers = supplierMapper.selectList(supplierLambdaQueryWrapper);
+        return AjaxResult.success("查找成功").put("suppliers",suppliers);
+    }
+
 }
