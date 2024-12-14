@@ -6,6 +6,7 @@ import com.wanmait.scmdemo.entity.SupplierEnterRuleData;
 import com.wanmait.scmdemo.service.SupplierEnterRuleDataService;
 import com.wanmait.scmdemo.service.SupplierEnterRuleService;
 import com.wanmait.scmdemo.util.AjaxResult;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -36,9 +36,10 @@ public class SupplierEnterRuleDataController {
     public AjaxResult insertRule(@RequestBody SupplierEnterRuleDTO supplierEnterRuleDTO) {
         System.out.println("Test------>>>>>>" + supplierEnterRuleDTO.getSupplierEnterRule().getName() + "----" + supplierEnterRuleDTO.getSupplierEnterRule().getTotalScore());
         System.out.println("Test------>>>>>>" + supplierEnterRuleDTO);
+
         SupplierEnterRule supplierEnterRule = supplierEnterRuleDTO.getSupplierEnterRule();
         supplierEnterRuleService.save(supplierEnterRule);
-        Integer pid = supplierEnterRule.getId();
+        Integer pid = supplierEnterRule.getId();//唯一
         List<SupplierEnterRuleData> supplierEnterRuleDataList = supplierEnterRuleDTO.getSupplierEnterRuleDataList();
         supplierEnterRuleDataList.forEach(supplierEnterRuleData -> {
             supplierEnterRuleData.setEnterRuleId(pid);
@@ -47,8 +48,10 @@ public class SupplierEnterRuleDataController {
         return AjaxResult.success("添加成功");
     }
 
+    @Cacheable(value = "commonCache", key = "'supplierEnterRule:'+#supplierEnterRule")
     @GetMapping("list")
     public AjaxResult findAll() {
+
         //获取准入条例 列表
         List<SupplierEnterRule> supplierEnterRules = supplierEnterRuleService.list();
         /*创建一个存放两个对象的DTO*/
@@ -56,6 +59,7 @@ public class SupplierEnterRuleDataController {
 
         for (SupplierEnterRule supplierEnterRule : supplierEnterRules) {
 
+            /*给每一个DTO条例赋值id  DTO的id准入条例的id*/
             SupplierEnterRuleDTO supplierEnterRuleDTO = new SupplierEnterRuleDTO();
 
             //取出每条条例的id 并设置id
@@ -67,8 +71,9 @@ public class SupplierEnterRuleDataController {
             Map<String, Object> map = new HashMap<>();
             map.put("enter_rule_id", id);
             List<SupplierEnterRuleData> supplierEnterRuleDataList = supplierEnterRuleDataService.listByMap(map);  // 请替换为实际的获取逻辑
-            //设置多个小条例列表
+            //设置条例内的条例规则
             supplierEnterRuleDTO.setSupplierEnterRuleDataList(supplierEnterRuleDataList);
+
             //添加的list中
             supplierEnterRuleDTOList.add(supplierEnterRuleDTO);
         }
