@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wanmait
- * @since 2024-11-26
+ * @since 2024-12-10
  */
 public interface ContactinfoMapper extends BaseMapper<Contactinfo> {
 

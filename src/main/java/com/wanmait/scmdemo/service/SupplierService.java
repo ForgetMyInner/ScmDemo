@@ -2,6 +2,8 @@ package com.wanmait.scmdemo.service;
 
 import com.wanmait.scmdemo.entity.Supplier;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wanmait.scmdemo.entity.SupplierDTO;
+import com.wanmait.scmdemo.util.AjaxResult;
 
 /**
  * <p>
@@ -12,5 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-12-04
  */
 public interface SupplierService extends IService<Supplier> {
+    AjaxResult register(SupplierDTO dto);
+    AjaxResult findBySupplierState();
 
 }
