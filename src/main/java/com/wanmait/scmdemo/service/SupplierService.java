@@ -15,5 +15,6 @@ import com.wanmait.scmdemo.util.AjaxResult;
  */
 public interface SupplierService extends IService<Supplier> {
     AjaxResult register(SupplierDTO dto);
+    AjaxResult findBySupplierState();
 
 }
