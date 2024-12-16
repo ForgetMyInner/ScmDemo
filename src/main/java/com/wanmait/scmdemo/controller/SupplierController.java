@@ -35,7 +35,6 @@ public class SupplierController {
     private ScmDictDataService scmDictDataService;
 
     //查询所有
-
     @GetMapping("/list")
     public AjaxResult list(){
         return AjaxResult.success("查询成功").put("name","mazihao").put("suppliers",supplierService.list());
@@ -64,4 +63,10 @@ public class SupplierController {
         System.out.println(dto);
             return AjaxResult.success("添加成功");
     }
+    //查询潜在供应商进行审批
+    @GetMapping("/innerList")
+    public AjaxResult innerList(){
+        return supplierService.findBySupplierState();
+    }
+    //通过供应商的id获取其他信息
 }
