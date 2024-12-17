@@ -26,12 +26,12 @@ public class ProductCategory {
     /**
      * 产品类型名称
      */
-    private Integer productType;
+    private String productType;
 
     /**
      * 提交人
      */
-    private Integer enterPerson;
+    private String enterPerson;
 
     /**
      * 提交时间
@@ -46,7 +46,7 @@ public class ProductCategory {
     /**
      * 产品属性
      */
-    private Integer productAttribute;
+    private String productAttribute;
 
     private Boolean enable;
 }
