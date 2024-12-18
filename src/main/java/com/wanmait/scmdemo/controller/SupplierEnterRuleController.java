@@ -24,7 +24,7 @@ import java.util.Map;
  * @since 2024-11-26
  */
 @RestController
-@RequestMapping("/supplierEnterRule")
+@RequestMapping("/manage/supplierEnterRule")
 public class SupplierEnterRuleController {
     @Resource
     private SupplierEnterRuleService supplierEnterRuleService;
