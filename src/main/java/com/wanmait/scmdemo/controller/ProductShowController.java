@@ -30,7 +30,13 @@ public class ProductShowController {
     @Autowired
     private ProductShowService productShowService;
     //根据多选框查询产品权限
+    @PostMapping("/product/selectPermissions")
+    public String selectPermissions(@RequestBody List<String> checkedPermissions) {
 
+        System.out.println(checkedPermissions.size()); // 打印接收到的数组
+        // 这里可以进行进一步的处理，例如存储到数据库、进行验证等
+        return "{\"message\":\"Permissions received successfully\"}";
+    }
     //根据id查询产品
     @GetMapping("/product/selectId")
     public AjaxResult getProductselectId(Integer dataType){
@@ -38,19 +44,9 @@ public class ProductShowController {
         return AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShowService.getById(dataType));
     }
     //查询所有产品
-    @PostMapping("/product/list")
-    public AjaxResult getProductShowByRoot(@RequestBody ProductShow productShow){
-        List<ProductShow>   productShows;
-        if (!productShow.getPresentedPermissions()&&!productShow.getSalePermissions()&&!productShow.getPurchasePermissions()){
-            productShows  =productShowService.list();
-        }
-        else
-            productShows=productShowService.selectRoot(productShow);
-        return AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShows);
-    }
     @GetMapping("/product/list")
     public AjaxResult getProductShow(){
-      return   AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShowService.list());
+        return AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShowService.list());
     }
     //根据产品类型查找
     @GetMapping("/product/selsctProduct")
