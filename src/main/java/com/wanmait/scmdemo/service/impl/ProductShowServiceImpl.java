@@ -33,7 +33,7 @@ public class ProductShowServiceImpl extends ServiceImpl<ProductShowMapper, Produ
         entity.setEnable(true);
         return super.save(entity);
     }
-//    从数据库查询然后生成一个唯一的编码
+    //    从数据库查询然后生成一个唯一的编码
     private String generateProductCode() {
         String productCode;
         do {
@@ -115,6 +115,7 @@ public class ProductShowServiceImpl extends ServiceImpl<ProductShowMapper, Produ
             LambdaQueryWrapper<ProductShow> lambdaQueryWrapper=new LambdaQueryWrapper();
             lambdaQueryWrapper.eq(ProductShow::getPresentedPermissions,productShow.getPresentedPermissions()).eq(ProductShow::getPurchasePermissions,productShow.getPurchasePermissions()).eq(ProductShow::getSalePermissions,productShow.getSalePermissions());
             productShows=productShowMapper.selectList(lambdaQueryWrapper);
+
 
         }
         return productShows;
