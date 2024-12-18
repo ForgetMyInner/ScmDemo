@@ -38,4 +38,5 @@ public class Imgs {
     private Integer sort;
 
     private Boolean enable;
+    private String imges;
 }
