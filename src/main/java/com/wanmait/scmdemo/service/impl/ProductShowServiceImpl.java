@@ -61,4 +61,66 @@ public class ProductShowServiceImpl extends ServiceImpl<ProductShowMapper, Produ
         queryWrapper.eq(ProductShow::getProductName,name);
         return productShowMapper.selectList(queryWrapper);
     }
+
+    @Override
+    public List<ProductShow> selectRoot(ProductShow productShow) {
+        List<ProductShow> productShows = null;
+        if(productShow.getPurchasePermissions()==true&&productShow.getSalePermissions()==false&&productShow.getPresentedPermissions()==false)
+        {
+            LambdaQueryWrapper<ProductShow> lambdaQueryWrapper=new LambdaQueryWrapper();
+            lambdaQueryWrapper.eq(ProductShow::getPurchasePermissions,productShow.getPurchasePermissions());
+            productShows=productShowMapper.selectList(lambdaQueryWrapper);
+
+        }
+        if(productShow.getPurchasePermissions()==false&&productShow.getSalePermissions()==true&&productShow.getPresentedPermissions()==false)
+        {
+            LambdaQueryWrapper<ProductShow> lambdaQueryWrapper=new LambdaQueryWrapper();
+            lambdaQueryWrapper.eq(ProductShow::getSalePermissions,productShow.getSalePermissions());
+            productShows=productShowMapper.selectList(lambdaQueryWrapper);
+
+        }
+        if(productShow.getPurchasePermissions()==false&&productShow.getSalePermissions()==false&&productShow.getPresentedPermissions()==true)
+        {
+            LambdaQueryWrapper<ProductShow> lambdaQueryWrapper=new LambdaQueryWrapper();
+            lambdaQueryWrapper.eq(ProductShow::getPresentedPermissions,productShow.getPresentedPermissions());
+            productShows=productShowMapper.selectList(lambdaQueryWrapper);
+
+        }
+        if(productShow.getPurchasePermissions()==true&&productShow.getSalePermissions()==true&&productShow.getPresentedPermissions()==false)
+        {
+
+            LambdaQueryWrapper<ProductShow> lambdaQueryWrapper=new LambdaQueryWrapper();
+            lambdaQueryWrapper.eq(ProductShow::getPurchasePermissions,productShow.getPurchasePermissions()).eq(ProductShow::getSalePermissions,productShow.getSalePermissions());
+            productShows=productShowMapper.selectList(lambdaQueryWrapper);
+
+        }
+        if(productShow.getPurchasePermissions()==true&&productShow.getSalePermissions()==false&&productShow.getPresentedPermissions()==true)
+        {
+
+            LambdaQueryWrapper<ProductShow> lambdaQueryWrapper=new LambdaQueryWrapper();
+            lambdaQueryWrapper.eq(ProductShow::getPurchasePermissions,productShow.getPurchasePermissions()).eq(ProductShow::getPresentedPermissions,productShow.getPresentedPermissions());
+            productShows=productShowMapper.selectList(lambdaQueryWrapper);
+
+        }
+        if(productShow.getPurchasePermissions()==false&&productShow.getSalePermissions()==true&&productShow.getPresentedPermissions()==true)
+        {
+
+            LambdaQueryWrapper<ProductShow> lambdaQueryWrapper=new LambdaQueryWrapper();
+            lambdaQueryWrapper.eq(ProductShow::getSalePermissions,productShow.getSalePermissions()).eq(ProductShow::getPresentedPermissions,productShow.getPresentedPermissions());
+            productShows=productShowMapper.selectList(lambdaQueryWrapper);
+
+        }
+        if(productShow.getPurchasePermissions()==true&&productShow.getSalePermissions()==true&&productShow.getPresentedPermissions()==true)
+        {
+            LambdaQueryWrapper<ProductShow> lambdaQueryWrapper=new LambdaQueryWrapper();
+            lambdaQueryWrapper.eq(ProductShow::getPresentedPermissions,productShow.getPresentedPermissions()).eq(ProductShow::getPurchasePermissions,productShow.getPurchasePermissions()).eq(ProductShow::getSalePermissions,productShow.getSalePermissions());
+            productShows=productShowMapper.selectList(lambdaQueryWrapper);
+
+        }
+        return productShows;
+//        LambdaQueryWrapper<ProductShow> lambdaQueryWrapper=new LambdaQueryWrapper();
+//        lambdaQueryWrapper.eq(ProductShow::getPresentedPermissions,productShow.getPresentedPermissions()).eq(ProductShow::getPurchasePermissions,productShow.getPurchasePermissions()).eq(ProductShow::getSalePermissions,productShow.getSalePermissions());
+//        List<ProductShow> productShows=productShowMapper.selectList(lambdaQueryWrapper);
+//        return productShows;
+    }
 }
