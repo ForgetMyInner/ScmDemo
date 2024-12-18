@@ -37,7 +37,7 @@ public class ScmDictDataController {
         LambdaQueryWrapper<ScmDictData> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(ScmDictData::getDictType, dictType);
         queryWrapper.select(ScmDictData::getDictLabel, ScmDictData::getDictCode);
-        System.out.println("查询结果："+ scmDictDataService.list(queryWrapper));
+//        System.out.println("查询结果："+ scmDictDataService.list(queryWrapper));
         return scmDictDataService.list(queryWrapper);
     }
 }
