@@ -32,6 +32,21 @@ import java.util.UUID;
 public class ProductShowController {
     @Autowired
     private ProductShowService productShowService;
+    //根据多选框查询产品权限
+    @PostMapping("/product/selectPermissions")
+    public String selectPermissions(@RequestBody List<String> checkedPermissions) {
+
+        System.out.println(checkedPermissions.size()); // 打印接收到的数组
+        // 这里可以进行进一步的处理，例如存储到数据库、进行验证等
+        return "{\"message\":\"Permissions received successfully\"}";
+    }
+    //根据id查询产品
+    @GetMapping("/product/selectId")
+    public AjaxResult getProductselectId(Integer dataType){
+        System.out.println(productShowService.getById(dataType));
+        return AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShowService.getById(dataType));
+    }
+    //查询所有产品
     @Autowired
     private ImgsService imgsService;
 
@@ -39,7 +54,24 @@ public class ProductShowController {
     public AjaxResult getProductShow() {
         return AjaxResult.success("查询成功").put("name", "wanmait").put("productShows", productShowService.list());
     }
-
+    //根据产品类型查找
+    @GetMapping("/product/selsctProduct")
+    public AjaxResult selsctProduct(String dataType)
+    {
+        return AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShowService.selectProduct(dataType));
+    }
+    //根据产品名称查询
+    @GetMapping("/product/selsctName")
+    public AjaxResult selsctName(String dataType)
+    {
+        return AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShowService.selectName(dataType));
+    }
+    //根据品牌查找
+    @GetMapping("/product/selsctBrand")
+    public AjaxResult selsctBrand(String dataType)
+    {
+        return AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShowService.selectBrand(dataType));
+    }
     @RequestMapping(value = "/product/add", method = RequestMethod.POST)
     public AjaxResult addProductShow(@RequestBody ProductShow productShow) {
         System.out.println("添加产品测试");
@@ -88,5 +120,6 @@ public class ProductShowController {
             e.printStackTrace();
             return AjaxResult.error("上传失败");
         }
+
     }
 }

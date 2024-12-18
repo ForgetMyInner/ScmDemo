@@ -1,5 +1,6 @@
 package com.wanmait.scmdemo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanmait.scmdemo.entity.ProductShow;
 import com.wanmait.scmdemo.mapper.ProductShowMapper;
 import com.wanmait.scmdemo.service.ProductShowService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -38,5 +40,25 @@ public class ProductShowServiceImpl extends ServiceImpl<ProductShowMapper, Produ
             productCode = String.valueOf(System.currentTimeMillis());
         } while (productShowMapper.existsByProductCode(productCode));
         return productCode;
+    }
+
+    @Override
+    //根据品牌查找
+    public List<ProductShow> selectProduct(String produc) {
+        LambdaQueryWrapper<ProductShow> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.eq(ProductShow::getProductType,produc);
+        return productShowMapper.selectList(queryWrapper);
+    }
+    //根据品牌查找
+    public List<ProductShow> selectBrand(String brand) {
+        LambdaQueryWrapper<ProductShow> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.eq(ProductShow::getProductBrand,brand);
+        return productShowMapper.selectList(queryWrapper);
+    }
+    //根据品牌查找
+    public List<ProductShow> selectName(String name) {
+        LambdaQueryWrapper<ProductShow> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.eq(ProductShow::getProductName,name);
+        return productShowMapper.selectList(queryWrapper);
     }
 }
