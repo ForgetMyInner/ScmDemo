@@ -42,8 +42,8 @@ public class WarehouseController {
 
         //随机12位仓库编码
         warehouse.setCode(code);
+        warehouse.setEnable(true);
 
-        
         warehouseService.save(warehouse);
         return AjaxResult.success("添加成功",warehouse);
     }
