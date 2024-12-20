@@ -2,6 +2,7 @@ package com.wanmait.scmdemo.service;
 
 import com.wanmait.scmdemo.entity.Attachment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wanmait.scmdemo.util.AjaxResult;
 
 /**
  * <p>
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-12-10
  */
 public interface AttachmentService extends IService<Attachment> {
+    AjaxResult findBySupplierId(int id);
+
 
 }
