@@ -1,7 +1,11 @@
 package com.wanmait.scmdemo.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.wanmait.scmdemo.entity.DeliverPerson;
+import com.wanmait.scmdemo.service.DeliverPersonService;
+import com.wanmait.scmdemo.util.AjaxResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -14,5 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/deliverPerson")
 public class DeliverPersonController {
+    @Resource
+    private DeliverPersonService deliverPersonService;
 
+    //添加送货联系人
+    @PostMapping("/add")
+    public AjaxResult add(@RequestBody DeliverPerson deliverPerson)
+    {
+        deliverPersonService.save(deliverPerson);
+        return AjaxResult.success("添加成功",deliverPerson);
+    }
+    //根据id查询送货联系人
+    @GetMapping("/{id:\\d+}")//利用正则表达式限制,传的id为数字
+    public AjaxResult findById(@PathVariable Integer id)//放在路径里边需要+@PathVariable
+    {
+        return AjaxResult.success("查询成功",deliverPersonService.getById(id));
+    }
 }
