@@ -63,5 +63,5 @@ public class SupplierSign {
      */
     private Integer imgsId;
 
-    private Long enable;
+    private Boolean enable;
 }
