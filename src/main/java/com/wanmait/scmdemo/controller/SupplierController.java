@@ -83,5 +83,5 @@ public class SupplierController {
     public AjaxResult innerList(){
         return supplierService.findBySupplierState();
     }
-    //通过供应商的id获取其他信息
+    //通过供应商的id获取当前供应商
 }
