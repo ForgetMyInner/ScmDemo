@@ -67,7 +67,6 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
         Attachment attachment = dto.getAttachment();
         attachment.setSupplierId(id);
         attachmentMapper.insert(attachment);
-
 //        System.out.println(dto.getSupplier());
 //        System.out.println(dto.getContactinfo());
 //        System.out.println(dto.getAttachment());

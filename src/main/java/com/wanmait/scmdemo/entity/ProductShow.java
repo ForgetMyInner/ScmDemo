@@ -57,7 +57,7 @@ public class ProductShow {
     /**
      * 产品单位
      */
-    private Integer priductUnit;
+    private String priductUnit;
 
     /**
      * 产品采购权限

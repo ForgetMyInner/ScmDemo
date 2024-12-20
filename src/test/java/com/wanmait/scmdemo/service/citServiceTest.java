@@ -1,7 +1,5 @@
 package com.wanmait.scmdemo.service;
 
-import com.wanmait.scmdemo.mapper.CityMapper;
-import com.wanmait.scmdemo.mapper.ProvinceMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

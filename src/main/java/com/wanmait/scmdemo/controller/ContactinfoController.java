@@ -1,7 +1,13 @@
 package com.wanmait.scmdemo.controller;
 
+import com.wanmait.scmdemo.service.ContactinfoService;
+import com.wanmait.scmdemo.util.AjaxResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -12,7 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-11-26
  */
 @RestController
-@RequestMapping("/contactinfo")
+@RequestMapping("/manage/contactinfo")
 public class ContactinfoController {
+    @Resource
+    private ContactinfoService contactinfoService;
+    @GetMapping("{id:\\d+}")
+    public AjaxResult getContactinfo(@PathVariable Integer id){
+        return AjaxResult.success("查找成功").put("contactinfo",contactinfoService.findBySupplierId(id));
+    }
+
+
 
 }
