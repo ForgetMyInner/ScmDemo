@@ -1,5 +1,6 @@
 package com.wanmait.scmdemo.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wanmait.scmdemo.aop.LogInfo;
 import com.wanmait.scmdemo.entity.ScmDictType;
 import com.wanmait.scmdemo.entity.Supplier;
@@ -15,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -38,6 +41,18 @@ public class SupplierController {
     @GetMapping("/list")
     public AjaxResult list(){
         return AjaxResult.success("查询成功").put("name","mazihao").put("suppliers",supplierService.list());
+    }
+    //查询一级二级三级供应商--为了只给这几类供应商进行操作
+    @GetMapping("/qualifiedSupplierList")
+    public AjaxResult qualifiedSupplierList() {
+        // 创建 QueryWrapper 对象
+        QueryWrapper<Supplier> queryWrapper = new QueryWrapper<>();
+        // 定义条件，假设你的列名为 supplier_state
+        String[] states = {"一级供应商", "二级供应商", "三级供应商"};
+        queryWrapper.in("supplier_state", Arrays.asList(states));
+        // 进行条件查询
+        List<Supplier> supplierList = supplierService.list(queryWrapper);
+        return AjaxResult.success("查询成功").put("name", "Tong").put("suppliers", supplierList);
     }
     //查询注册供应商
     @GetMapping("/regList")
@@ -68,5 +83,5 @@ public class SupplierController {
     public AjaxResult innerList(){
         return supplierService.findBySupplierState();
     }
-    //通过供应商的id获取其他信息
+    //通过供应商的id获取当前供应商
 }
