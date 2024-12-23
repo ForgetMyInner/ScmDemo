@@ -8,13 +8,14 @@
         <result column="name" property="name" />
         <result column="create_person" property="createPerson" />
         <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
         <result column="total_score" property="totalScore" />
         <result column="enable" property="enable" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, create_person, create_time, total_score, enable
+        id, name, create_person, create_time,update_time, total_score, enable
     </sql>
 
 </mapper>
