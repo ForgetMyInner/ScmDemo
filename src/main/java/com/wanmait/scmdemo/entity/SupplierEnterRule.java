@@ -3,7 +3,9 @@ package com.wanmait.scmdemo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -39,6 +41,10 @@ public class SupplierEnterRule {
      * 创建时间
      */
     private Date createTime;
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
 
     /**
      * 每一项条例的总分

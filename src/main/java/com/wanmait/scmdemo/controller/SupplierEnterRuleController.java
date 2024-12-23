@@ -3,6 +3,7 @@ package com.wanmait.scmdemo.controller;
 import com.wanmait.scmdemo.entity.SupplierEnterRuleDTO;
 import com.wanmait.scmdemo.service.SupplierEnterRuleService;
 import com.wanmait.scmdemo.util.AjaxResult;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -29,7 +30,7 @@ public class SupplierEnterRuleController {
         return supplierEnterRuleService.insertDTO(supplierEnterRuleDTO);
     }
 
-    //    @Cacheable(value = "commonCache", key = "'supplierEnterRule:'+#supplierEnterRule")
+//    @Cacheable(value = "commonCache", key = "'supplierEnterRule:'+#supplierEnterRule")
     @GetMapping("list")
     public AjaxResult findAll() {
         return supplierEnterRuleService.findAll();
