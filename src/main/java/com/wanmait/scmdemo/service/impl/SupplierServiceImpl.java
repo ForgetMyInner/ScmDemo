@@ -1,6 +1,7 @@
 package com.wanmait.scmdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.wanmait.scmdemo.aop.LogInfo;
 import com.wanmait.scmdemo.entity.*;
 import com.wanmait.scmdemo.mapper.AttachmentMapper;
@@ -46,8 +47,6 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
         ServletRequestAttributes requestAttributes=(ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
         Admin admin = (Admin) request.getAttribute("admin");
-        System.out.println(admin.getUsername());
-
         //供应商准入注册
         Supplier supplier = dto.getSupplier();
         supplier.setSupplierCode(GYSCodeGenerator.generateCode());
@@ -76,14 +75,15 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
     @Override
     public AjaxResult findBySupplierState() {
         LambdaQueryWrapper<Supplier>  supplierLambdaQueryWrapper= new LambdaQueryWrapper<>();
-        supplierLambdaQueryWrapper.eq(Supplier::getSupplierState,"潜在供应商");
+//        supplierLambdaQueryWrapper.isNotNull(Supplier::getSupplierLevel).eq(Supplier::getSupplierState,"潜在供应商");
+        supplierLambdaQueryWrapper.isNull(Supplier::getSupplierLevel).eq(Supplier::getSupplierState,"潜在供应商");
         ServletRequestAttributes requestAttributes=(ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
         Admin admin = (Admin) request.getAttribute("admin");
 
         supplierLambdaQueryWrapper.eq(Supplier::getEnterPerson,admin.getUsername());
         List<Supplier> suppliers = supplierMapper.selectList(supplierLambdaQueryWrapper);
-        return AjaxResult.success("查找成功").put("suppliers",suppliers);
+        return AjaxResult.success("查找成功").put("suppliers",suppliers).put("length",suppliers.size());
     }
 
 }

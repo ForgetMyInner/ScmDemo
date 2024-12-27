@@ -130,4 +130,5 @@ public class Supplier {
     private Boolean enable;
 
     private Integer cityId;
+    private String supplierLevel;
 }
