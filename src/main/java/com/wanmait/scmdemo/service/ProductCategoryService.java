@@ -2,6 +2,9 @@ package com.wanmait.scmdemo.service;
 
 import com.wanmait.scmdemo.entity.ProductCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wanmait.scmdemo.entity.ProductShow;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-11-26
  */
 public interface ProductCategoryService extends IService<ProductCategory> {
+    List<ProductCategory> selectProduct(String produc);
+
 
 }

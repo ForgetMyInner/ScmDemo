@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.ApprovalMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.Approval">
+        <id column="id" property="id" />
+        <result column="symbol" property="symbol" />
+        <result column="aim_id" property="aimId" />
+        <result column="time" property="time" />
+        <result column="userinfo_id" property="userinfoId" />
+        <result column="status" property="status" />
+        <result column="reason" property="reason" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, symbol, aim_id, time, userinfo_id, status, reason
+    </sql>
+
+</mapper>

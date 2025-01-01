@@ -1,7 +1,9 @@
 package com.wanmait.scmdemo.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wanmait.scmdemo.entity.ProductCategory;
 import com.wanmait.scmdemo.service.ProductCategoryService;
+import com.wanmait.scmdemo.service.ProductShowService;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,5 +40,11 @@ public class ProductCategoryController {
     @PostMapping("deleteBatch")
     public AjaxResult deleteBatch(@RequestBody List<Integer> ids) {
         return AjaxResult.success(productCategoryService.removeBatchByIds(ids));
+    }
+    //根据产品类型查找
+    @GetMapping("selectProducts")
+    public AjaxResult selectProduct(String dataType)
+    {
+        return AjaxResult.success("查询成功").put("productCategorys",productCategoryService.selectProduct(dataType));
     }
 }
