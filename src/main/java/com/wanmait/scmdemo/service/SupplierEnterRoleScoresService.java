@@ -15,5 +15,7 @@ import java.util.Map;
  * @since 2024-12-25
  */
 public interface SupplierEnterRoleScoresService extends IService<SupplierEnterRoleScores> {
-    void saveScores(Integer supplierId,String clauseName,Integer maxScore, List<Map<String, Object>> clauseItems,String supplierLevel);
+    void saveScores(Integer supplierId,String clauseName,Integer maxScore, List<Map<String, Object>> clauseItems,String supplierLevel,Integer RuleId);
+
+    List<SupplierEnterRoleScores> getBySupplierId(Integer supplierId);
 }

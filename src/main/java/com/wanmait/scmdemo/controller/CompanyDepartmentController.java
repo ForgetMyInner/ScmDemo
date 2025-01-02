@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @since 2024-11-26
  */
 @RestController
-@RequestMapping("/companyDepartment")
+@RequestMapping("/manage/companyDepartment")
 public class CompanyDepartmentController {
     @Resource
     private CompanyDepartmentService companyDepartmentService;

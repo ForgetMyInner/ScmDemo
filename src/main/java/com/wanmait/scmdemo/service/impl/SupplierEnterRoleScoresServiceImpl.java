@@ -1,5 +1,6 @@
 package com.wanmait.scmdemo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanmait.scmdemo.aop.LogInfo;
 import com.wanmait.scmdemo.entity.Admin;
 import com.wanmait.scmdemo.entity.Approval;
@@ -39,7 +40,7 @@ public class SupplierEnterRoleScoresServiceImpl extends ServiceImpl<SupplierEnte
     ApprovalMapper approvalMapper;
     @LogInfo("供应商准入条例打分")
     @Override
-    public void saveScores(Integer supplierId,String clauseName,Integer totalScore, List<Map<String, Object>> clauseItems,String supplierLevel) {
+    public void saveScores(Integer supplierId,String clauseName,Integer totalScore, List<Map<String, Object>> clauseItems,String supplierLevel,Integer ruleId) {
         //获取操作管理员
         ServletRequestAttributes requestAttributes=(ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
@@ -50,6 +51,7 @@ public class SupplierEnterRoleScoresServiceImpl extends ServiceImpl<SupplierEnte
             supplierEnterRoleScore.setSupplierId(supplierId);
             supplierEnterRoleScore.setRuleName(clauseName);
             supplierEnterRoleScore.setTotalScore(totalScore);
+            supplierEnterRoleScore.setRuleId(ruleId);
             supplierEnterRoleScore.setRuleDataName((String) item.get("rules"));
             supplierEnterRoleScore.setScore((Integer) item.get("score"));
             supplierEnterRoleScore.setRemark((String) item.get("description"));
@@ -62,9 +64,14 @@ public class SupplierEnterRoleScoresServiceImpl extends ServiceImpl<SupplierEnte
         approval.setSymbol(1);
         approval.setAimId(supplierId);
         approval.setUserinfoId(admin.getId());
-
         approvalMapper.insert(approval);
+    }
 
+    @Override
+    public List<SupplierEnterRoleScores> getBySupplierId(Integer supplierId) {
+        LambdaQueryWrapper<SupplierEnterRoleScores> supplierEnterRoleScoresLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        supplierEnterRoleScoresLambdaQueryWrapper.eq(SupplierEnterRoleScores::getSupplierId,supplierId);
 
+        return supplierEnterRoleScoresMapper.selectList(supplierEnterRoleScoresLambdaQueryWrapper);
     }
 }

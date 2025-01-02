@@ -1,9 +1,12 @@
 package com.wanmait.scmdemo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -27,7 +30,8 @@ public class ProductWarehouse {
      * 产品展示id
      */
     private Integer productShow;
-
+    @TableField(exist = false)
+    private ProductShow productShowEntity;//产品对象
     /**
      * 假删除
      */
@@ -62,4 +66,7 @@ public class ProductWarehouse {
      * 仓库id
      */
     private Integer warehouseId;
+
+    @TableField(exist = false)
+    private Warehouse warehouseEntity;//仓库对象
 }
