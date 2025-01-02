@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @since 2024-11-26
  */
 @RestController
-@RequestMapping("/deliverPerson")
+@RequestMapping("/manage/deliverPerson")
 public class DeliverPersonController {
     @Resource
     private DeliverPersonService deliverPersonService;
