@@ -4,20 +4,69 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.ProductWarehouse">
-        <id column="id" property="id" />
-        <result column="product_show" property="productShow" />
-        <result column="enable" property="enable" />
-        <result column="enter_person" property="enterPerson" />
-        <result column="enter_time" property="enterTime" />
-        <result column="update_time" property="updateTime" />
-        <result column="update_person" property="updatePerson" />
-        <result column="product_num" property="productNum" />
-        <result column="warehouse_id" property="warehouseId" />
+        <id column="id" property="id"/>
+        <result column="product_show" property="productShow"/>
+        <result column="enable" property="enable"/>
+        <result column="enter_person" property="enterPerson"/>
+        <result column="enter_time" property="enterTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_person" property="updatePerson"/>
+        <result column="product_num" property="productNum"/>
+        <result column="warehouse_id" property="warehouseId"/>
+        <association property="productShowEntity" javaType="com.wanmait.scmdemo.entity.ProductShow">
+            <id column="id" property="id"/>
+            <result column="product_code" property="productCode"/>
+            <result column="product_name" property="productName"/>
+            <result column="product_brand" property="productBrand"/>
+            <result column="product_attribute" property="productAttribute"/>
+            <result column="product_type" property="productType"/>
+            <result column="product_models" property="productModels"/>
+            <result column="priduct_unit" property="priductUnit"/>
+            <result column="purchase_permissions" property="purchasePermissions"/>
+            <result column="product_imgs_id" property="productImgsId"/>
+            <result column="presented_permissions" property="presentedPermissions"/>
+            <result column="product_unit_price" property="productUnitPrice"/>
+            <result column="sale_permissions" property="salePermissions"/>
+            <result column="enable" property="enable"/>
+            <result column="enter_person" property="enterPerson"/>
+            <result column="enter_time" property="enterTime"/>
+            <result column="update_time" property="updateTime"/>
+            <result column="update_person" property="updatePerson"/>
+        </association>
+        <association property="warehouseEntity" javaType="com.wanmait.scmdemo.entity.Warehouse">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="code" property="code"/>
+            <result column="address" property="address"/>
+            <result column="capacity" property="capacity"/>
+            <result column="nature" property="nature"/>
+            <result column="company_department_id" property="companyDepartmentId"/>
+            <result column="warehouse_leader" property="warehouseLeader"/>
+            <result column="phone" property="phone"/>
+            <result column="min_count" property="minCount"/>
+            <result column="max_count" property="maxCount"/>
+            <result column="product_management_id" property="productManagementId"/>
+            <result column="instore_num" property="instoreNum"/>
+            <result column="now_count" property="nowCount"/>
+            <result column="rent" property="rent"/>
+            <result column="end_time" property="endTime"/>
+            <result column="stop" property="stop"/>
+            <result column="enable" property="enable"/>
+        </association>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, product_show, enable, enter_person, enter_time, update_time, update_person, product_num, warehouse_id
+            id,
+            product_show,
+            enable,
+            enter_person,
+            enter_time,
+            update_time,
+            update_person,
+            product_num,
+            warehouse_id
     </sql>
+
 
 </mapper>

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -31,11 +33,13 @@ public class SupplierSign {
     /**
      * 签约开始日期
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date startTime;
 
     /**
      * 签约结束日期
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date endTime;
 
     /**
@@ -51,17 +55,12 @@ public class SupplierSign {
     /**
      * 采购负责人(根据部门选择)
      */
-    private Integer purchasePerson;
+    private String purchasePerson;
 
     /**
      * 采购部门
      */
     private String purchaseDepartment;
-
-    /**
-     * ******************未定/可能用不到
-     */
-    private Integer imgsId;
 
     private Boolean enable;
 }
