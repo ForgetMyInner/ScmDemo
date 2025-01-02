@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
  * @since 2024-12-04
  */
 @Controller
-@RequestMapping("/province")
+@RequestMapping("/manage/province")
 public class ProvinceController {
 
 }
