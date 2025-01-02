@@ -59,4 +59,5 @@ public class SupplierEnterRoleScores {
     private Date creatTime;
 
     private String creatPerson;
+    private Integer ruleId;
 }

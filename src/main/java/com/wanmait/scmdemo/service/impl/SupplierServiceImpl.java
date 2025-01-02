@@ -66,16 +66,12 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
         Attachment attachment = dto.getAttachment();
         attachment.setSupplierId(id);
         attachmentMapper.insert(attachment);
-//        System.out.println(dto.getSupplier());
-//        System.out.println(dto.getContactinfo());
-//        System.out.println(dto.getAttachment());
         return AjaxResult.success("成功录入");
     }
 
     @Override
     public AjaxResult findBySupplierState() {
         LambdaQueryWrapper<Supplier>  supplierLambdaQueryWrapper= new LambdaQueryWrapper<>();
-//        supplierLambdaQueryWrapper.isNotNull(Supplier::getSupplierLevel).eq(Supplier::getSupplierState,"潜在供应商");
         supplierLambdaQueryWrapper.isNull(Supplier::getSupplierLevel).eq(Supplier::getSupplierState,"潜在供应商");
         ServletRequestAttributes requestAttributes=(ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
