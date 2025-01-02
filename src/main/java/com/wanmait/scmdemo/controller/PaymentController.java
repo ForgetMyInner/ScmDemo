@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-11-26
  */
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/manage/payment")
 public class PaymentController {
 
 }

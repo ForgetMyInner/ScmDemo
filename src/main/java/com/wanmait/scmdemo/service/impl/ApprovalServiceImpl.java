@@ -38,6 +38,9 @@ public class ApprovalServiceImpl extends ServiceImpl<ApprovalMapper, Approval> i
                 .map(Approval::getAimId) // 提取aim_id
                 .collect(Collectors.toList()); // 收集到列表中
         List<Supplier> suppliers = supplierMapper.selectBatchIds(aimIdsWithStatusZero);
+        if (suppliers==null){
+            return null;
+        }
 
 
         return suppliers;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-11-26
  */
 @RestController
-@RequestMapping("/otherInWarehouse")
+@RequestMapping("/manage/otherInWarehouse")
 public class OtherInWarehouseController {
 
 }
