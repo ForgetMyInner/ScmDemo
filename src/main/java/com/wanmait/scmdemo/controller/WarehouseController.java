@@ -21,7 +21,7 @@ import java.util.Random;
  * @since 2024-11-26
  */
 @RestController//相当于@Controller+@ResponseBody(所有的函数都不转发)
-@RequestMapping("/warehouse")
+@RequestMapping("/manage/warehouse")
 public class WarehouseController {
     @Resource
     private WarehouseService warehouseService;
