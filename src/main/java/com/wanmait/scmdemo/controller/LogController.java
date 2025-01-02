@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
  * @since 2024-12-14
  */
 @Controller
-@RequestMapping("/log")
+@RequestMapping("/manage/log")
 public class LogController {
 
 }
