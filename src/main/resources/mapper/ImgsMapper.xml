@@ -17,4 +17,5 @@
         id, pid, type, remark, sort, enable
     </sql>
 
+
 </mapper>
