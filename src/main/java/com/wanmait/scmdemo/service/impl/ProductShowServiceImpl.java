@@ -1,7 +1,9 @@
 package com.wanmait.scmdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.wanmait.scmdemo.entity.Imgs;
 import com.wanmait.scmdemo.entity.ProductShow;
+import com.wanmait.scmdemo.mapper.ImgsMapper;
 import com.wanmait.scmdemo.mapper.ProductShowMapper;
 import com.wanmait.scmdemo.service.ProductShowService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -25,13 +27,21 @@ import java.util.List;
 public class ProductShowServiceImpl extends ServiceImpl<ProductShowMapper, ProductShow> implements ProductShowService {
     @Autowired
     private ProductShowMapper  productShowMapper;
+    @Autowired
+    private ImgsMapper imgsMapper;
     @Override
     public boolean save(ProductShow entity) {
         entity.setProductCode(generateProductCode());
         entity.setEnterTime(new Date());
         entity.setUpdateTime(new Date());
+
         entity.setEnable(true);
-        return super.save(entity);
+        boolean save = super.save(entity);
+        Integer id = entity.getId();
+        if(id!=null) {
+
+        }
+        return save;
     }
     //    从数据库查询然后生成一个唯一的编码
     private String generateProductCode() {

@@ -1,5 +1,6 @@
 package com.wanmait.scmdemo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.math.BigDecimal;
 import lombok.Data;
@@ -24,11 +25,15 @@ public class ProductSupplier {
      * 产品展示id
      */
     private Integer productShowId;
+    @TableField(exist = false)
+    private ProductShow productShow;
 
     /**
      * 供应商id
      */
     private Integer supplierId;
+    @TableField(exist = false)
+    private Supplier supplier;
 
     /**
      * 标准采购单价（含税）

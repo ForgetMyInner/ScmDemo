@@ -23,6 +23,7 @@ public class CompanyDepartmentController {
     private CompanyDepartmentService companyDepartmentService;
     //查询所有部门
     @GetMapping("/list")
+
     public AjaxResult list()
     {
         return AjaxResult.success("查询成功",companyDepartmentService.list());

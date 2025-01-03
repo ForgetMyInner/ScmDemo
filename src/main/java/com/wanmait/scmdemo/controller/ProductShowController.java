@@ -1,6 +1,8 @@
 package com.wanmait.scmdemo.controller;
 
+import com.wanmait.scmdemo.entity.Imgs;
 import com.wanmait.scmdemo.entity.ProductShow;
+import com.wanmait.scmdemo.service.ImgsService;
 import com.wanmait.scmdemo.service.ProductShowService;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.apache.commons.io.FilenameUtils;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,8 +32,16 @@ import java.util.UUID;
 public class ProductShowController {
     @Autowired
     private ProductShowService productShowService;
+    @Autowired
+    private ImgsService imgsService;
     //根据多选框查询产品权限
+    @PostMapping("/product/selectPermissions")
+    public String selectPermissions(@RequestBody List<String> checkedPermissions) {
 
+        System.out.println(checkedPermissions.size()); // 打印接收到的数组
+        // 这里可以进行进一步的处理，例如存储到数据库、进行验证等
+        return "{\"message\":\"Permissions received successfully\"}";
+    }
     //根据id查询产品
     @GetMapping("/product/selectId")
     public AjaxResult getProductselectId(Integer dataType){
@@ -81,17 +92,61 @@ public class ProductShowController {
     }
 
     @PostMapping("/product/uploadPic")
-    public AjaxResult uploadPic(MultipartFile file){
+    public AjaxResult uploadPic(MultipartFile fileList){
+        System.out.println("111"+fileList.getSize());
+        if (fileList == null || fileList.isEmpty()) {
+            return AjaxResult.error("未选择文件或文件为空");
+        }
         try{
             //检查大小和类型
-            String path=ResourceUtils.getURL("classpath:").getPath()+"static/uploadImage";
-            String fileName =UUID.randomUUID().toString().replaceAll("-","")+"."+FilenameUtils.getExtension(file.getOriginalFilename());
-            file.transferTo(new File(path,fileName));
-            return  AjaxResult.success("上传成功").put("fileName",fileName);
-        }catch (IOException e){
+            System.out.println("111"+fileList.getSize());
+            String path = ResourceUtils.getURL("classpath:").getPath() + "static/uploadImage";
+            String fileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + FilenameUtils.getExtension(fileList.getOriginalFilename());
+            fileList.transferTo(new File(path, fileName));
+            return AjaxResult.success("上传成功").put("fileName", fileName);
+        } catch (IOException e) {
             e.printStackTrace();
             return AjaxResult.error("上传失败");
         }
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    @PostMapping("/product/uploadPics")
+//    public AjaxResult uploadPics(MultipartFile[] files, Integer pid) {
+//        try {
+//            String path = ResourceUtils.getURL("classpath:").getPath() + "static/uploadImage";
+//            List<Imgs> imgsList = new ArrayList<>();
+//            for (MultipartFile file : files) {
+//                String fileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+//                file.transferTo(new File(path, fileName));
+//                // 创建 Imgs 对象，存储文件信息
+//                Imgs img = new Imgs();
+//                /**
+//                  谁用到的id
+//                 */
+//                img.setPid(pid);
+//                img.setType(FilenameUtils.getExtension(file.getOriginalFilename()));
+//                img.setEnable(true);
+//                file.transferTo(new File(path, fileName));
+//            }
+//            // 保存多个 Imgs 对象到数据库
+//            imgsService.saveBatch(imgsList);
+//            return AjaxResult.success("上传成功");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return AjaxResult.error("上传失败");
+//        }
+//
+//    }
 }
