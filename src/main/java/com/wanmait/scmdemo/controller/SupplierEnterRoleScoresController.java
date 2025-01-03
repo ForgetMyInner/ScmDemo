@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +64,17 @@ public class SupplierEnterRoleScoresController {
     public AjaxResult submitApproval(@RequestBody Map<String, Object> approvalData){
 
         String agreement = (String) approvalData.get("agreement");
-//        Date approvalTime = (Date) approvalData.get("approvalTime");
+        String frontendDate=(String) approvalData.get("approvalTime");
+        String isoDateString = frontendDate;
+
+        // 解析ISO 8601格式的日期字符串
+        OffsetDateTime odt = OffsetDateTime.parse(isoDateString);
+
+        // 将OffsetDateTime转换为Instant
+        java.time.Instant instant = odt.toInstant();
+
+        // 将Instant转换为java.util.Date
+        Date date = Date.from(instant);
         String approver = (String) approvalData.get("approver");
         String reason = (String) approvalData.get("reason");
         Integer supplierId = (Integer) approvalData.get("supplierId");
@@ -71,12 +83,12 @@ public class SupplierEnterRoleScoresController {
 
         // 执行查询
         Approval approval = approvalService.getOne(queryWrapper);
-//        approval.setTime(approvalTime);
+        approval.setTime(date);
         approval.setReason(reason);
         if (agreement.equals("同意")){
             approval.setStatus(true);
         }else {
-            approval.setStatus(false);
+            approval.setStatus(true);
             approval.setReason(reason);
         }
         approvalService.updateById(approval);

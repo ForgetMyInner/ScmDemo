@@ -27,10 +27,10 @@ public class ApprovalController {
     private ApprovalService approvalService;
     @GetMapping("/list")
     public AjaxResult list(){
-        if (approvalService.findWaitApprovalList()==null){
-            return null;
+        if (approvalService.findWaitApprovalList()!=null){
+            return AjaxResult.success("查询成功").put("name","mazihao").put("waitApprovalenterSupplier",approvalService.findWaitApprovalList());
         }
-        return AjaxResult.success("查询成功").put("name","mazihao").put("waitApprovalenterSupplier",approvalService.findWaitApprovalList());
+        return null;
     }
 
 
