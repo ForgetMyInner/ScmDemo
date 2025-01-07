@@ -72,4 +72,8 @@
     <select id="existsByProductCode" resultType="boolean">
         SELECT COUNT(*) > 0 FROM product_show WHERE product_code = #{productCode}
     </select>
+
+    <select id="selectProduct" resultType="com.wanmait.scmdemo.entity.ProductShow">
+        select product_show.* FROM product_supplier, product_show WHERE supplier_id= #{id} AND product_show_id=product_show.id
+    </select>
 </mapper>
