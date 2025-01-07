@@ -3,6 +3,8 @@ package com.wanmait.scmdemo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -48,6 +50,14 @@ public class SupplierSampleManagement {
      */
     private String enterPerson;
 
+    /**
+     * 产品总价
+     */
+    private BigDecimal lumpSum;
+    /**
+     * 样品数量(添加样品)
+     */
+    private Integer totalNumber;
     /**
      * 录入时间
      */

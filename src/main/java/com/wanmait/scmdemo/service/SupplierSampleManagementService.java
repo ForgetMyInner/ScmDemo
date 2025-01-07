@@ -1,7 +1,10 @@
 package com.wanmait.scmdemo.service;
 
+import com.wanmait.scmdemo.entity.ProductShow;
 import com.wanmait.scmdemo.entity.SupplierSampleManagement;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-11-26
  */
 public interface SupplierSampleManagementService extends IService<SupplierSampleManagement> {
-
+    List<SupplierSampleManagement> selectSupplierSampleManagement(SupplierSampleManagement supplierSampleManagement);
 }
