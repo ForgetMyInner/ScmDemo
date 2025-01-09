@@ -84,4 +84,10 @@ public class SupplierController {
         return supplierService.findBySupplierState();
     }
     //通过供应商的id获取当前供应商
+    @GetMapping("/{id:\\d+}")//利用正则表达式限制,传的id为数字
+    public AjaxResult findById(@PathVariable Integer id)//放在路径里边需要+@PathVariable
+    {
+        return AjaxResult.success("查询成功",supplierService.getById(id));
+    }
+
 }

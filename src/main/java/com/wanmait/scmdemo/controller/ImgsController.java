@@ -97,6 +97,23 @@ public class ImgsController {
             return AjaxResult.error("图片信息保存失败", e.getMessage());
         }
     }
+
+    //通过供应商id即-->pid查询名下合同附件
+//    @GetMapping("/{pid:\\d+}")//利用正则表达式限制,传的pid为数字
+//    public AjaxResult findById(@PathVariable Integer pid)//放在路径里边需要+@PathVariable
+//    {
+//        return AjaxResult.success("查询成功",imgsService.getById(pid));
+//    }
+//
+    @GetMapping("/{pid}")
+    public AjaxResult getImgsByPid(@PathVariable Integer pid) {
+        List<Imgs> imgsList = imgsService.getImgsByPid(pid);
+        if (!imgsList.isEmpty()) {
+            return AjaxResult.success(imgsList);
+        } else {
+            return AjaxResult.error("No images found with pid: " + pid);
+        }
+    }
 }
 
 

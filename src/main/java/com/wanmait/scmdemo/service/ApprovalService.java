@@ -16,4 +16,10 @@ import java.util.List;
  */
 public interface ApprovalService extends IService<Approval> {
     List<Supplier> findWaitApprovalList();
+    List<Supplier> findWaitSignList();
+    //根据aimId来修改审批表
+    boolean updateApprovalByAimId(Integer aimId, Approval approval);
+
+    //发现等待审批的供应商签约的数据们
+    List<Supplier> findWaitApprovalSupplierSignList();
 }

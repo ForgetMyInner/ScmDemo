@@ -14,4 +14,5 @@ import java.util.List;
  * @since 2024-11-26
  */
 public interface ImgsMapper extends BaseMapper<Imgs> {
+    List<Imgs> selectByPid(Integer pid);
 }

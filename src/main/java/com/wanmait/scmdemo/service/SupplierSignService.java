@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-11-26
  */
 public interface SupplierSignService extends IService<SupplierSign> {
+    SupplierSign getSupplierById(Integer supplierId);
 
 }

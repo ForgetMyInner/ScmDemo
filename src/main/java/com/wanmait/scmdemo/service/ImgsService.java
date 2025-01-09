@@ -18,5 +18,6 @@ public interface ImgsService extends IService<Imgs> {
     boolean saveBatch(List<Imgs> entityList, int batchSize);
     boolean saveOrUpdateBatch(List<Imgs> entityList);
     boolean saveOrUpdateBatch(List<Imgs> entityList, int batchSize);
+    List<Imgs> getImgsByPid(Integer pid);
 
 }

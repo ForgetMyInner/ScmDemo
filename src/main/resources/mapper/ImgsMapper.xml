@@ -18,5 +18,8 @@
         id, pid, type, remark, sort, enable, imges
     </sql>
 
-
+        <!-- 这里定义 selectByPid 方法的 SQL 语句 -->
+        <select id="selectByPid" resultType="com.wanmait.scmdemo.entity.Imgs">
+            select * from imgs where pid = #{pid}
+        </select>
 </mapper>
