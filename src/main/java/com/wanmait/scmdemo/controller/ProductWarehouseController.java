@@ -1,7 +1,6 @@
 package com.wanmait.scmdemo.controller;
 
 
-
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
@@ -30,10 +29,17 @@ public class ProductWarehouseController {
     @Resource
     private ProductWarehouseService productWarehouseService;
 
-    /*仓库辅助表首页 list*/
+    /*lzq 仓库辅助表首页 list*/
     @GetMapping("/assistant/list")
     public AjaxResult list(int pageNum, int pageSize) {
         return AjaxResult.success(productWarehouseService.assistantPageList(pageNum, pageSize));
+    }
+
+    /*lzq 仓库辅助表搜索*/
+    @PostMapping("/assistant/list/search")
+    public AjaxResult search(String keyword, Integer pageNum) {
+        System.out.println(keyword + "----" + pageNum);
+        return AjaxResult.success(productWarehouseService.search(keyword, pageNum));
     }
 
     /*下载 table信息*/

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,12 +25,13 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, ProductCategory> implements ProductCategoryService {
 
-    @Autowired
+    @Resource
     private ProductCategoryMapper productCategoryMapper;
+
     @Override
     public List<ProductCategory> selectProduct(String dataType) {
-        LambdaQueryWrapper<ProductCategory> queryWrapper=new LambdaQueryWrapper<>();
-        queryWrapper.eq(ProductCategory::getProductAttribute,dataType);
+        LambdaQueryWrapper<ProductCategory> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(ProductCategory::getProductAttribute, dataType);
         return productCategoryMapper.selectList(queryWrapper);
     }
 }
