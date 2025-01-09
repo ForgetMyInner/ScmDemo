@@ -1,7 +1,13 @@
 package com.wanmait.scmdemo.controller;
 
+import com.wanmait.scmdemo.service.CompanyDepartmentService;
+import com.wanmait.scmdemo.service.ProductOrderService;
+import com.wanmait.scmdemo.util.AjaxResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -12,7 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-11-26
  */
 @RestController
-@RequestMapping("/productOrder")
+@RequestMapping("/manage/productOrder")
 public class ProductOrderController {
+    @Resource
+    private CompanyDepartmentService companyDepartmentService;
+    //查询所有部门
+    @GetMapping("/list")
 
+    public AjaxResult list()
+    {
+        return AjaxResult.success("查询成功",companyDepartmentService.list());
+    }
 }

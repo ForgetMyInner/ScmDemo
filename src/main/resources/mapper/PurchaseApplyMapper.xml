@@ -24,4 +24,7 @@
         id, code, employee_id, enter_time, delivery_demand_time, warehouse_id, source, remark, all_price, approval_status, approval_time, approval_person_id, rfq_quote
     </sql>
 
+    <select id="exists" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM purchase_apply WHERE code = #{purchaseApplyCode}
+    </select>
 </mapper>

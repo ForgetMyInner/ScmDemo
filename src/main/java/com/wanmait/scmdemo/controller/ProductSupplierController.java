@@ -1,7 +1,19 @@
 package com.wanmait.scmdemo.controller;
 
+import com.wanmait.scmdemo.entity.ProductSupplier;
+import com.wanmait.scmdemo.service.ProductShowService;
+import com.wanmait.scmdemo.service.ProductSupplierService;
+import com.wanmait.scmdemo.service.SupplierService;
+import com.wanmait.scmdemo.util.AjaxResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -12,7 +24,20 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-11-26
  */
 @RestController
-@RequestMapping("/productSupplier")
-public class ProductSupplierController {
 
+@RequestMapping("/manage/productSupplier")
+public class ProductSupplierController {
+    @Autowired
+    private ProductSupplierService productSupplierService;
+    @Autowired
+    private ProductShowService productShowService;
+    @Autowired
+    private SupplierService supplierService;
+
+
+    @GetMapping("SupplierProductList")
+    public AjaxResult SupplierProductList(){
+
+        return AjaxResult.success(productSupplierService.list());
+    }
 }

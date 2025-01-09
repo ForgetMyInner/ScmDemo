@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanmait.scmdemo.mapper.SampleTableMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wanmait.scmdemo.entity.SampleTable">
+        <id column="id" property="id" />
+        <result column="supplier_sample_management_id" property="supplierSampleManagementId" />
+        <result column="product_name" property="productName" />
+        <result column="product_code" property="productCode" />
+        <result column="product_brand" property="productBrand" />
+        <result column="product_attribute" property="productAttribute" />
+        <result column="product_type" property="productType" />
+        <result column="product_models" property="productModels" />
+        <result column="priduct_unit" property="priductUnit" />
+        <result column="product_imgs_id" property="productImgsId" />
+        <result column="sample_product_num" property="sampleProductNum" />
+        <result column="product_unit_price" property=" productUnitPrice" />
+        <result column="total_price" property="totalPrice" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, supplier_sample_management_id, product_name, product_code, product_brand, product_attribute, product_type, product_models, priduct_unit, product_imgs_id, sample_product_num, sample_product_price, total_price
+    </sql>
+
+</mapper>

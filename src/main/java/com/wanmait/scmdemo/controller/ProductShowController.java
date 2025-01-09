@@ -1,6 +1,7 @@
 package com.wanmait.scmdemo.controller;
 
 import com.wanmait.scmdemo.entity.ProductShow;
+import com.wanmait.scmdemo.entity.Supplier;
 import com.wanmait.scmdemo.service.ProductShowService;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.apache.commons.io.FilenameUtils;
@@ -29,12 +30,16 @@ import java.util.UUID;
 public class ProductShowController {
     @Autowired
     private ProductShowService productShowService;
-    //根据多选框查询产品权限
 
+    @PostMapping("/select/product")
+    public AjaxResult selectProduct(@RequestBody Supplier supplier){
+
+        return AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShowService.selectProduct(supplier));
+    }
     //根据id查询产品
     @GetMapping("/product/selectId")
     public AjaxResult getProductselectId(Integer dataType){
-        System.out.println(productShowService.getById(dataType));
+
         return AjaxResult.success("查询成功").put("name","wanmait").put("productShows",productShowService.getById(dataType));
     }
     //查询所有产品

@@ -2,6 +2,7 @@ package com.wanmait.scmdemo.service;
 
 import com.wanmait.scmdemo.entity.ProductShow;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wanmait.scmdemo.entity.Supplier;
 
 import java.util.List;
 
@@ -22,5 +23,7 @@ public interface ProductShowService extends IService<ProductShow> {
     List<ProductShow> selectName(String name);
 
     List<ProductShow> selectRoot(ProductShow productShow);
+    //根据产品类型查询
+    List<ProductShow> selectProduct(Supplier supplier);
 
 }

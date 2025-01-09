@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -108,4 +110,6 @@ public class ProductShow {
      * 更新人
      */
     private String updatePerson;
+
+
 }

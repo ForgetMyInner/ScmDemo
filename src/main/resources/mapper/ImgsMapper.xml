@@ -10,11 +10,12 @@
         <result column="remark" property="remark" />
         <result column="sort" property="sort" />
         <result column="enable" property="enable" />
+        <result column="imges" property="imges" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, pid, type, remark, sort, enable
+        id, pid, type, remark, sort, enable, imges
     </sql>
 
 
