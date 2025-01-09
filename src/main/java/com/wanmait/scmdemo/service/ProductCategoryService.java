@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2024-11-26
  */
 public interface ProductCategoryService extends IService<ProductCategory> {
-    List<ProductCategory> selectProduct(String produc);
+    List<ProductCategory> selectProduct(String product);
 
 
 }

@@ -39,7 +39,6 @@ public class WarehouseController {
         }
         String code = code1.toString();
 
-
         //随机12位仓库编码
         warehouse.setCode(code);
         warehouse.setEnable(true);
