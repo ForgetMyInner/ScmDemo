@@ -37,8 +37,7 @@ public class ProductSupplierController {
 
     @GetMapping("SupplierProductList")
     public AjaxResult SupplierProductList(){
-        List list = productSupplierService.list();
-        System.out.println(list);
+
         return AjaxResult.success(productSupplierService.list());
     }
 }
