@@ -12,5 +12,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-11-26
  */
 public interface PurchaseApplyService extends IService<PurchaseApply> {
-
 }
