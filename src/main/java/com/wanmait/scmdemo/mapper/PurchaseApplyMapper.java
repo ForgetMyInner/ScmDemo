@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2024-11-26
  */
 public interface PurchaseApplyMapper extends BaseMapper<PurchaseApply> {
-
+//检查是否唯一
+    boolean exists(String purchaseApplyCode);
 }
