@@ -53,6 +53,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         if(loginAdmin==null){
             return AjaxResult.error(10004,"用户名或者密码错误");
         }
+
+
         //更新登录信息
         Admin updateAdmin = new Admin();
         updateAdmin.setId(loginAdmin.getId());
@@ -71,6 +73,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         claims.put("name",loginAdmin.getName());
         //生成jwt token
         String token = JWTUtils.createToken(loginAdmin.getId()+"",expireMinutes,loginAdmin.getPassword(),claims);
+        //把用户对象放到redis中，键是"token:"+token字符串
+
         loginAdmin.setPassword(null).setSalt(null);
         return AjaxResult.success("登录成功").put("admin",loginAdmin).put("token",token);
     }

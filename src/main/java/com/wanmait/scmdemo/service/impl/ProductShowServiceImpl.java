@@ -2,6 +2,7 @@ package com.wanmait.scmdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanmait.scmdemo.entity.ProductShow;
+import com.wanmait.scmdemo.entity.Supplier;
 import com.wanmait.scmdemo.mapper.ProductShowMapper;
 import com.wanmait.scmdemo.service.ProductShowService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -124,4 +125,11 @@ public class ProductShowServiceImpl extends ServiceImpl<ProductShowMapper, Produ
 //        List<ProductShow> productShows=productShowMapper.selectList(lambdaQueryWrapper);
 //        return productShows;
     }
+
+    @Override
+    public List<ProductShow> selectProduct(Supplier supplier) {
+        return  productShowMapper.selectProduct(supplier);
+    }
+
+
 }
