@@ -86,7 +86,8 @@ public class SupplierEnterRoleScoresController {
         approval.setTime(date);
         approval.setReason(reason);
         if (agreement.equals("同意")){
-            approval.setStatus(true);
+            approval.setSymbol(2);
+            approval.setStatus(false);
         }else {
             approval.setStatus(true);
             approval.setReason(reason);

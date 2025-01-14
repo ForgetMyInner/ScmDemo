@@ -20,7 +20,7 @@ public interface ProductWarehouseService extends IService<ProductWarehouse> {
     /*仓库辅助页list*/
     PageInfo<ProductWarehouse> assistantPageList(int pageNum, int PageSize);
 
-    /*仓库辅助页关键词搜索*/
+    /*lzq 仓库辅助页关键词搜索*/
     PageInfo<ProductWarehouse> search(String keyword, int pageNum);
 
     Page<ProductWarehouse> searchByEnterPerson(String keyword, int pageNum);

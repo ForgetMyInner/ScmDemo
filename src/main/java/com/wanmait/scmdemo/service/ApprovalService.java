@@ -16,4 +16,6 @@ import java.util.List;
  */
 public interface ApprovalService extends IService<Approval> {
     List<Supplier> findWaitApprovalList();
+
+    List<Supplier> findSupplierWaitSignApprovalList();
 }
