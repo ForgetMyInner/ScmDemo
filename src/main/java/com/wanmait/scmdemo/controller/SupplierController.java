@@ -1,10 +1,12 @@
 package com.wanmait.scmdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageInfo;
 import com.wanmait.scmdemo.aop.LogInfo;
 import com.wanmait.scmdemo.entity.ScmDictType;
 import com.wanmait.scmdemo.entity.Supplier;
 import com.wanmait.scmdemo.entity.SupplierDTO;
+import com.wanmait.scmdemo.service.ConfigService;
 import com.wanmait.scmdemo.service.ScmDictDataService;
 import com.wanmait.scmdemo.service.SupplierService;
 import com.wanmait.scmdemo.util.AjaxResult;
@@ -36,11 +38,26 @@ public class SupplierController {
     private SupplierService supplierService;
     @Resource
     private ScmDictDataService scmDictDataService;
+    @Resource
+    private ConfigService configService;
+
 
     //查询所有
-    @GetMapping("/list")
-    public AjaxResult list(){
-        return AjaxResult.success("查询成功").put("name","mazihao").put("suppliers",supplierService.list());
+
+    @PostMapping("list")
+    public AjaxResult list(@RequestBody Supplier supplier, Integer pageNum,Integer pageSize){
+        if(pageNum==null){
+            pageNum=1;
+        }
+        try {
+            if (pageSize==null) {
+                pageSize = Integer.parseInt(configService.listKeyValueMap().get("manage_pagesize"));
+            }
+        } catch (NumberFormatException e) {
+            pageSize=10;
+        }
+        PageInfo<Supplier> supplierPageInfo = supplierService.supplierWithAttachAndContact(supplier, pageNum, pageSize);
+        return AjaxResult.success("查询成功").put("name","mazihao").put("supplierPageInfo",supplierPageInfo);
     }
     //查询一级二级三级供应商--为了只给这几类供应商进行操作
     @GetMapping("/qualifiedSupplierList")
