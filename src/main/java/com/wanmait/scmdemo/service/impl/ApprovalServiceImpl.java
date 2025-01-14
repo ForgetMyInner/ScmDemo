@@ -53,4 +53,29 @@ public class ApprovalServiceImpl extends ServiceImpl<ApprovalMapper, Approval> i
             return Collections.emptyList();
         }
     }
+
+    //查出待签约的供应商进行审批
+    @Override
+    public List<Supplier> findSupplierWaitSignApprovalList() {
+        LambdaQueryWrapper<Approval> approvalLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        approvalLambdaQueryWrapper.eq(Approval::getStatus, 0).eq(Approval::getSymbol, 2).eq(Approval::getReason,"");
+        List<Approval> approvals = approvalMapper.selectList(approvalLambdaQueryWrapper);
+
+        // 使用Optional.ofNullable确保即使approvals为null也返回一个空列表
+        List<Approval> nonNullApprovals = Optional.ofNullable(approvals).orElse(Collections.emptyList());
+
+        List<Integer> aimIdsWithStatusFalse = nonNullApprovals.stream()
+                .filter(approval -> approval.getStatus() == false) // 过滤出status为0的记录
+                .map(Approval::getAimId) // 提取aim_id
+                .collect(Collectors.toList()); // 收集到列表中
+
+        // 只有当aimIdsWithStatusZero不为空时，才调用selectBatchIds
+        if (!aimIdsWithStatusFalse.isEmpty()) {
+            List<Supplier> suppliers = supplierMapper.selectBatchIds(aimIdsWithStatusFalse);
+            return suppliers;
+        } else {
+            // 返回一个空列表而不是null
+            return Collections.emptyList();
+        }
+    }
 }
