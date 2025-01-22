@@ -7,10 +7,7 @@ import com.wanmait.scmdemo.service.PurchaseApplyService;
 import com.wanmait.scmdemo.service.PurchaseProductDetailsService;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,4 +40,9 @@ public AjaxResult add(@RequestBody PurchaseApplyDTO formData) {
     }
     return AjaxResult.success("采购申请保存成功");
 }
+@GetMapping("/list")
+    public AjaxResult list()
+    {
+        return AjaxResult.success("查询成功",purchaseApplyService.list());
+    }
 }
