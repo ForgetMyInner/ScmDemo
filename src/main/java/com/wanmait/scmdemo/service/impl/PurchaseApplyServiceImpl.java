@@ -25,7 +25,7 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
     private PurchaseApplyMapper purchaseApplyMapper;
     @Override
     public boolean save(PurchaseApply entity) {
-        entity.setCode(generateCode());
+        entity.setCode("SQ"+generateCode());
         entity.setEnterTime(new Date());
         boolean save = super.save(entity);
         Integer id = entity.getId();
