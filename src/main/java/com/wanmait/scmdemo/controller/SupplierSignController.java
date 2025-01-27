@@ -1,14 +1,20 @@
 package com.wanmait.scmdemo.controller;
 
-import com.wanmait.scmdemo.entity.Supplier;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.wanmait.scmdemo.entity.Approval;
 import com.wanmait.scmdemo.entity.SupplierSign;
 import com.wanmait.scmdemo.entity.Warehouse;
+import com.wanmait.scmdemo.service.ApprovalService;
 import com.wanmait.scmdemo.service.SupplierSignService;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -16,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.*;
 
 /**
@@ -32,30 +39,74 @@ public class SupplierSignController {
 
     @Resource
     private SupplierSignService supplierSignService;
+    @Resource
+    private ApprovalService approvalService;
 
     //供应商签约添加
     @PostMapping("/add")
-    public AjaxResult add(@RequestBody SupplierSign supplierSign)//+@RequestBody不加接收不到数据
+    public AjaxResult add( @RequestBody Map<String, Object> approvalData)
     {
+        Integer supplierId = (Integer) approvalData.get("supplierId");
+        String startTime = (String) approvalData.get("startTime");
+        String endTime = (String) approvalData.get("endTime");
+        String settlementPeriod = (String) approvalData.get("settlementPeriod");
+        Integer creditLimit = (Integer) approvalData.get("creditLimit");
+        String creditLimit1="creditLimit";
+        String purchasePerson = (String) approvalData.get("purchasePerson");
+        String purchaseDepartment = (String) approvalData.get("purchaseDepartment");
+        String agreement = (String) approvalData.get("agreement");
+        String approvalTime = (String) approvalData.get("approvalTime");
+        approvalData.get("approver");
+        Integer approvalId = (Integer) approvalData.get("approvalId");
+        String reason = (String) approvalData.get("reason");
 
-        //设置供应商签约enable值
-        supplierSign.setEnable(true);
+        OffsetDateTime odt = OffsetDateTime.parse(approvalTime);
+        // 将OffsetDateTime转换为Instant
+        java.time.Instant instant = odt.toInstant();
+        Date approvalTimeDate = Date.from(instant);
 
-        supplierSignService.save(supplierSign);
-        return AjaxResult.success("添加成功",supplierSign);
-    }
-    //通过供应商id调取供应商签约数据
-    @GetMapping("getSupplierById")
-    public AjaxResult getSupplierById(@RequestParam Integer supplierId) {
-        // 调用服务层方法进行业务处理
-        SupplierSign supplierSign = supplierSignService.getSupplierById(supplierId);
-        if (supplierSign!= null) {
-            // 查询到数据，将结果封装在 AjaxResult 中返回
-            return AjaxResult.success("查询成功",supplierSign);
-        } else {
-            // 未查询到数据，返回相应的信息
-            return AjaxResult.error("未找到对应的供应商信息");
+
+// 创建 LambdaUpdateWrapper 对象用于构建更新条件
+        LambdaUpdateWrapper<Approval> updateWrapper = Wrappers.lambdaUpdate();
+        updateWrapper.eq(Approval::getStatus, 0)
+                .eq(Approval::getAimId, supplierId) // 假设 supplierId 已经在上下文中定义
+                .set(Approval::getReason, ""); // 如果需要更新 reason 字段为 ""
+
+// 根据 agreement 的值决定更新哪些字段
+        if ("同意".equals(agreement)) {
+            updateWrapper.set(Approval::getStatus, true)
+                    .set(Approval::getTime, approvalTimeDate)
+                    .set(Approval::getUserinfoId, approvalId);
+        }else {
+            updateWrapper.set(Approval::getStatus, true)
+                    .set(Approval::getTime, approvalTimeDate)
+                    .set(Approval::getUserinfoId, approvalId)
+                    .set(Approval::getReason,reason);
         }
+        // 调用 approvalService 的 update 方法执行更新操作
+        approvalService.update(updateWrapper);
+        //添加一条签约信息
+        OffsetDateTime odt1 = OffsetDateTime.parse(startTime);
+        // 将OffsetDateTime转换为Instant
+        java.time.Instant instant1 = odt1.toInstant();
+        Date startTimeDateTime = Date.from(instant1);
+        OffsetDateTime odt2 = OffsetDateTime.parse(endTime);
+        // 将OffsetDateTime转换为Instant
+        java.time.Instant instant2 = odt2.toInstant();
+        Date endTimeDateTime = Date.from(instant2);
+        SupplierSign supplierSign = new SupplierSign();
+        supplierSign.setSupplierId(supplierId);
+        supplierSign.setStartTime(startTimeDateTime);
+        supplierSign.setEndTime(endTimeDateTime);
+        supplierSign.setSupplierSignDeadline(settlementPeriod);
+        supplierSign.setCreditLimit(creditLimit1);
+        supplierSign.setPurchasePerson(purchasePerson);
+        supplierSign.setPurchaseDepartment(purchaseDepartment);
+        supplierSignService.save(supplierSign);
+
+
+        return AjaxResult.success("成功");
     }
+
 
 }

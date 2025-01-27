@@ -1,15 +1,14 @@
 package com.wanmait.scmdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wanmait.scmdemo.aop.LogInfo;
 import com.wanmait.scmdemo.entity.*;
-import com.wanmait.scmdemo.mapper.AttachmentMapper;
-import com.wanmait.scmdemo.mapper.ContactinfoMapper;
-import com.wanmait.scmdemo.mapper.QualificationinfoMapper;
-import com.wanmait.scmdemo.mapper.SupplierMapper;
+import com.wanmait.scmdemo.mapper.*;
 import com.wanmait.scmdemo.service.SupplierService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wanmait.scmdemo.esdao.SupplierRepository;
 import com.wanmait.scmdemo.util.AjaxResult;
 import com.wanmait.scmdemo.util.GYSCodeGenerator;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -31,13 +32,17 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor=Exception.class)
-public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> implements SupplierService {
+public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> implements SupplierService  {
     @Resource
     private SupplierMapper supplierMapper;
     @Resource
     private ContactinfoMapper contactinfoMapper;
     @Resource
     private AttachmentMapper attachmentMapper;
+    @Resource
+    private SupplierSignMapper supplierSignMapper;
+    @Resource
+    private SupplierRepository supplierRepository;
 
     //供应商信息录入
     @LogInfo("供应商信息录入")
@@ -80,6 +85,41 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
         supplierLambdaQueryWrapper.eq(Supplier::getEnterPerson,admin.getUsername());
         List<Supplier> suppliers = supplierMapper.selectList(supplierLambdaQueryWrapper);
         return AjaxResult.success("查找成功").put("suppliers",suppliers).put("length",suppliers.size());
+    }
+
+    @Override
+    public PageInfo<Supplier> supplierWithAttachAndContact(Supplier supplier1,int pageNum, int pageSize) {
+        LambdaQueryWrapper<Supplier> supplierLambdaQueryWrapper=new LambdaQueryWrapper<>(supplier1);
+        PageHelper.startPage(pageNum, pageSize);
+        List<Supplier> suppliers = supplierMapper.selectList(supplierLambdaQueryWrapper);
+        List<Attachment> attachments=attachmentMapper.selectList(null);
+        List<Contactinfo> contactinfos = contactinfoMapper.selectList(null);
+        List<SupplierSign> supplierSigns = supplierSignMapper.selectList(null);
+
+        Map<Integer, Supplier> supplierMap = suppliers.stream().collect(Collectors.toMap(Supplier::getId, supplier -> supplier));
+        for (Attachment attachment : attachments) {
+            Integer supplierId = attachment.getSupplierId();
+            Supplier supplier = supplierMap.get(supplierId);
+            if (supplier != null) {
+                supplier.setAttachment(attachment);
+            }
+        }
+        for (Contactinfo contactinfo : contactinfos){
+            Integer supplierId = contactinfo.getSupplierId();
+            Supplier supplier = supplierMap.get(supplierId);
+            if (supplier != null) {
+                supplier.setContactinfo(contactinfo);
+            }
+        }
+        for (SupplierSign supplierSign : supplierSigns) {
+            Integer supplierId = supplierSign.getSupplierId();
+            Supplier supplier = supplierMap.get(supplierId);
+            if (supplier != null) {
+                supplier.setSupplierSign(supplierSign);
+            }
+        }
+
+        return new PageInfo<>(suppliers,14);
     }
 
 }

@@ -31,6 +31,11 @@ public class ApprovalController {
         }
         return null;
     }
+    @GetMapping("/approvalSignList")
+    public AjaxResult approvalSignList(){
+//            System.out.println(approvalService.findSupplierWaitSignApprovalList());
+            return AjaxResult.success("查询成功").put("name","mazihao").put("approvalSignWaitList",approvalService.findSupplierWaitSignApprovalList());
+    }
 
     @GetMapping("/waitSignList")
     public AjaxResult waitSignList(){
