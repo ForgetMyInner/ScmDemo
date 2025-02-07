@@ -1,63 +1,124 @@
 package com.wanmait.scmdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wanmait.scmdemo.dto.PurchaseNeedPoolDTO;
-import com.wanmait.scmdemo.entity.ProductSupplier;
-import com.wanmait.scmdemo.entity.ProductWarehouse;
-import com.wanmait.scmdemo.entity.PurchaseProductDetails;
-import com.wanmait.scmdemo.service.ProductSupplierService;
-import com.wanmait.scmdemo.service.ProductWarehouseService;
-import com.wanmait.scmdemo.service.PurchaseProductDetailsService;
+import com.wanmait.scmdemo.entity.*;
+import com.wanmait.scmdemo.service.*;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <p>
- * 采购明细表----申请（还未购买） 前端控制器
- * </p>
- *
- * @author wanmait
- * @since 2024-11-26
- */
 @RestController
 @RequestMapping("/manage/purchaseProductDetails")
 public class PurchaseProductDetailsController {
+
     @Autowired
     private PurchaseProductDetailsService purchaseProductDetailsService;
     @Autowired
     private ProductWarehouseService productWarehouseService;
     @Autowired
     private ProductSupplierService productSupplierService;
-    @GetMapping("/list")
-    public AjaxResult list() {
+    @Autowired
+    private ProductShowService productShowService;
+    @Autowired
+    private WarehouseService warehouseService;
+    @Autowired
+    private PurchaseApplyService purchaseApplyService;
+    @Autowired
+    private SupplierService supplierService;
+    @Autowired
+    private EmployeeService employeeService;
+    @Autowired
+    private CompanyDepartmentService companyDepartmentService;
 
-        List<PurchaseProductDetails> purchaseProductDetailsList = purchaseProductDetailsService.list();
-        List<PurchaseNeedPoolDTO> purchaseNeedPoolDTOList= new ArrayList<>();
+    @GetMapping("/list")
+    public AjaxResult list(@RequestParam(defaultValue = "1") int page,
+                           @RequestParam(defaultValue = "10") int pageSize) {
+        // 创建分页对象
+        Page<PurchaseProductDetails> purchaseProductDetailsPage = new Page<>(page, pageSize);
+        // 执行分页查询
+        IPage<PurchaseProductDetails> purchaseProductDetailsIPage = purchaseProductDetailsService.page(purchaseProductDetailsPage);
+        List<PurchaseProductDetails> purchaseProductDetailsList = purchaseProductDetailsIPage.getRecords();
+
+        List<PurchaseNeedPoolDTO> purchaseNeedPoolDTOList = new ArrayList<>();
         for (PurchaseProductDetails details : purchaseProductDetailsList) {
             PurchaseNeedPoolDTO purchaseNeedPoolDTO = new PurchaseNeedPoolDTO();
-            LambdaQueryWrapper<ProductWarehouse> warehouseWrapper = new LambdaQueryWrapper<>();
-            warehouseWrapper.eq(ProductWarehouse::getId,details.getProductWarehouseId());
-            ProductWarehouse warehouse = productWarehouseService.getOne(warehouseWrapper);
-            LambdaQueryWrapper<ProductSupplier> productsupplierWrapper = new LambdaQueryWrapper<>();
-            productsupplierWrapper.eq(ProductSupplier::getId, details.getProductSupplierId());
-            ProductSupplier productSupplier = productSupplierService.getOne(productsupplierWrapper);
-            purchaseNeedPoolDTO.setProductWarehouse(warehouse);
+
+            // 产品在库存
+            LambdaQueryWrapper<ProductWarehouse> productWarehouseWrapper = new LambdaQueryWrapper<>();
+            productWarehouseWrapper.eq(ProductWarehouse::getId, details.getProductWarehouseId());
+            ProductWarehouse productWarehouse = productWarehouseService.getOne(productWarehouseWrapper);
+
+            // 产品 - 供应商关系表
+            LambdaQueryWrapper<ProductSupplier> productSupplierWrapper = new LambdaQueryWrapper<>();
+            productSupplierWrapper.eq(ProductSupplier::getId, details.getProductSupplierId());
+            ProductSupplier productSupplier = productSupplierService.getOne(productSupplierWrapper);
+
+            // 产品表
+            LambdaQueryWrapper<ProductShow> productShowWrapper = new LambdaQueryWrapper<>();
+            productShowWrapper.eq(ProductShow::getId, productSupplier.getProductShowId());
+            ProductShow productShow = productShowService.getOne(productShowWrapper);
+
+            // 供应商
+            LambdaQueryWrapper<Supplier> supplierWrapper = new LambdaQueryWrapper<>();
+            supplierWrapper.eq(Supplier::getId, productSupplier.getSupplierId());
+            Supplier supplier = supplierService.getOne(supplierWrapper);
+
+            // 仓库表
+            LambdaQueryWrapper<Warehouse> warehouseWrapper = new LambdaQueryWrapper<>();
+            warehouseWrapper.eq(Warehouse::getId, productWarehouse.getWarehouseId());
+            Warehouse warehouse = warehouseService.getOne(warehouseWrapper);
+
+            // 采购申请表
+            LambdaQueryWrapper<PurchaseApply> purchaseApplyWrapper = new LambdaQueryWrapper<>();
+            purchaseApplyWrapper.eq(PurchaseApply::getId, details.getPurchaseApplyId());
+            PurchaseApply purchaseApply = purchaseApplyService.getOne(purchaseApplyWrapper);
+
+            // 采购申请的员工
+            LambdaQueryWrapper<Employee> employeeWrapper = new LambdaQueryWrapper<>();
+            employeeWrapper.eq(Employee::getId, purchaseApply.getEmployeeId());
+            Employee employee = employeeService.getOne(employeeWrapper);
+
+            // 部门表
+            if (employee != null) {
+                LambdaQueryWrapper<CompanyDepartment> companyDepartmentWrapper = new LambdaQueryWrapper<>();
+                companyDepartmentWrapper.eq(CompanyDepartment::getId, employee.getCompanyDepartmentId());
+                CompanyDepartment companyDepartment = companyDepartmentService.getOne(companyDepartmentWrapper);
+                purchaseNeedPoolDTO.setCompanyDepartment(companyDepartment);
+            } else {
+                purchaseNeedPoolDTO.setCompanyDepartment(null);
+            }
+
+            purchaseNeedPoolDTO.setPurchaseProductDetails(details);
+            purchaseNeedPoolDTO.setProductShow(productShow);
+            purchaseNeedPoolDTO.setWarehouse(warehouse);
+            purchaseNeedPoolDTO.setPurchaseApply(purchaseApply);
+            purchaseNeedPoolDTO.setSupplier(supplier);
+            purchaseNeedPoolDTO.setProductWarehouse(productWarehouse);
             purchaseNeedPoolDTO.setProductSupplier(productSupplier);
-            System.out.println(purchaseNeedPoolDTO);
+            purchaseNeedPoolDTO.setEmployee(employee);
+
             purchaseNeedPoolDTOList.add(purchaseNeedPoolDTO);
         }
-        return AjaxResult.success("查询成功", purchaseNeedPoolDTOList);
-    }
-    @GetMapping("displayed")
-    public AjaxResult displayed(){
-        purchaseProductDetailsService.list();
 
+        // 封装分页结果
+        Page<PurchaseNeedPoolDTO> resultPage = new Page<>(page, pageSize, purchaseProductDetailsIPage.getTotal());
+        resultPage.setRecords(purchaseNeedPoolDTOList);
+
+        return AjaxResult.success("查询成功", resultPage);
+    }
+
+    @GetMapping("displayed")
+    public AjaxResult displayed() {
+        purchaseProductDetailsService.list();
         return AjaxResult.success("查询成功");
     }
 }
