@@ -1,5 +1,6 @@
 package com.wanmait.scmdemo.service;
 
+import com.github.pagehelper.PageInfo;
 import com.wanmait.scmdemo.entity.PurchaseProductDetails;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-11-26
  */
 public interface PurchaseProductDetailsService extends IService<PurchaseProductDetails> {
-
+    PageInfo<PurchaseProductDetails> purchaseProductDetailsWithAttachAndContact(PurchaseProductDetails purchaseProductDetails, int pageNum, int pageSize);
 }

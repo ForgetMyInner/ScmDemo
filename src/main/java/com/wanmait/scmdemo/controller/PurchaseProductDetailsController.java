@@ -3,18 +3,17 @@ package com.wanmait.scmdemo.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageInfo;
 import com.wanmait.scmdemo.dto.PurchaseNeedPoolDTO;
 import com.wanmait.scmdemo.entity.*;
 import com.wanmait.scmdemo.service.*;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/manage/purchaseProductDetails")
@@ -38,10 +37,27 @@ public class PurchaseProductDetailsController {
     private EmployeeService employeeService;
     @Autowired
     private CompanyDepartmentService companyDepartmentService;
+    @Autowired
+    private ConfigService configService;
+
+    @GetMapping("/listAll")
+    public AjaxResult listAll(@RequestBody PurchaseProductDetails purchaseProductDetails, Integer pageNum, Integer pageSize) {
+        if (pageNum==null){
+            pageNum = 1;
+        }
+        try {
+            if (pageSize==null){
+                pageSize=Integer.parseInt(configService.listKeyValueMap().get("manage_pagesize"));
+            }
+        }catch (NumberFormatException e){
+            pageSize=10;
+        }
+        PageInfo <PurchaseProductDetails> purchaseProductDetailsPageInfo = purchaseProductDetailsService.purchaseProductDetailsWithAttachAndContact(purchaseProductDetails, pageNum, pageSize);
+        return AjaxResult.success("查询成功").put("查询成功",purchaseProductDetailsPageInfo);
+    }
 
     @GetMapping("/list")
-    public AjaxResult list(@RequestParam(defaultValue = "1") int page,
-                           @RequestParam(defaultValue = "10") int pageSize) {
+    public AjaxResult list(@RequestParam(defaultValue = "0") int filterCriteria,@RequestParam (defaultValue = "") String conditions,@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int pageSize) {
         // 创建分页对象
         Page<PurchaseProductDetails> purchaseProductDetailsPage = new Page<>(page, pageSize);
         // 执行分页查询
@@ -96,7 +112,6 @@ public class PurchaseProductDetailsController {
             } else {
                 purchaseNeedPoolDTO.setCompanyDepartment(null);
             }
-
             purchaseNeedPoolDTO.setPurchaseProductDetails(details);
             purchaseNeedPoolDTO.setProductShow(productShow);
             purchaseNeedPoolDTO.setWarehouse(warehouse);
@@ -105,14 +120,43 @@ public class PurchaseProductDetailsController {
             purchaseNeedPoolDTO.setProductWarehouse(productWarehouse);
             purchaseNeedPoolDTO.setProductSupplier(productSupplier);
             purchaseNeedPoolDTO.setEmployee(employee);
-
             purchaseNeedPoolDTOList.add(purchaseNeedPoolDTO);
         }
 
+        // 根据 filterCriteria 和 conditions 过滤结果
+        if (!conditions.isEmpty()) {
+            switch (filterCriteria) {
+                case 1:
+                    // 假设 filterCriteria 为 1 时，根据产品名称过滤
+                    purchaseNeedPoolDTOList = purchaseNeedPoolDTOList.stream()
+                            .filter(dto -> dto.getProductShow() != null && dto.getProductShow().getProductName().contains(conditions))
+                            .collect(Collectors.toList());
+                    break;
+                case 2:
+                    // 假设 filterCriteria 为 2 时，根据供应商名称过滤
+                    purchaseNeedPoolDTOList = purchaseNeedPoolDTOList.stream()
+                            .filter(dto -> dto.getSupplier() != null && dto.getSupplier().getSupplierName().contains(conditions))
+                            .collect(Collectors.toList());
+                    break;
+                case 3:
+                    // 假设 filterCriteria 为 3 时，根据采购申请表的采购申请编号过滤
+                    purchaseNeedPoolDTOList = purchaseNeedPoolDTOList.stream()
+                            .filter(dto -> dto.getPurchaseApply() != null && dto.getPurchaseApply().getCode().contains(conditions))
+                            .collect(Collectors.toList());
+                    break;
+                case 4:
+                    // 假设 filterCriteria 为 4 时，根据仓库名
+                    purchaseNeedPoolDTOList = purchaseNeedPoolDTOList.stream()
+                            .filter(dto -> dto.getWarehouse() != null && dto.getWarehouse().getName().contains(conditions))
+                            .collect(Collectors.toList());
+                    break;
+                default:
+                    break;
+            }
+        }
         // 封装分页结果
         Page<PurchaseNeedPoolDTO> resultPage = new Page<>(page, pageSize, purchaseProductDetailsIPage.getTotal());
         resultPage.setRecords(purchaseNeedPoolDTOList);
-
         return AjaxResult.success("查询成功", resultPage);
     }
 
