@@ -43,7 +43,7 @@ public class ProductWarehouse {
     /**
      * 产品展示id
      */
-    @Field(name = "product_show",type = FieldType.Integer)
+    @Field(name = "product_show", type = FieldType.Integer)
     private Integer productShow;
     @TableField(exist = false)
     private ProductShow productShowEntity;//产品对象
@@ -74,19 +74,24 @@ public class ProductWarehouse {
     /**
      * 更新人
      */
-    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
+    @Field(name = "update_person", type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private String updatePerson;
 
     /**
      * 库存数量
      */
+    @Field(name = "product_num", type = FieldType.Integer)
     private Integer productNum;
 
     /**
      * 仓库id
      */
-    @Field(name = "warehouse_id",type = FieldType.Integer)
+    @Field(name = "warehouse_id", type = FieldType.Integer)
     private Integer warehouseId;
+
+    @Field(name = "warehouse_name", type = FieldType.Text)
+    @TableField(exist = false)
+    private String warehouseName;
 
     @TableField(exist = false)
     private Warehouse warehouseEntity;//仓库对象

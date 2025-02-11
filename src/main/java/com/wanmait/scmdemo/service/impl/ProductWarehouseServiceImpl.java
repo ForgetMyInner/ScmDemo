@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -78,12 +79,12 @@ public class ProductWarehouseServiceImpl extends ServiceImpl<ProductWarehouseMap
 
     @Override
     public PageInfo<ProductWarehouse> search(String keyword, int pageNum) {
-        int pageSize = 10;
-        int navigatePages = 11;
+        int pageSize = 10;//页面数据
+        int navigatePages = 11;//页码
 
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder();
         //指定查询条件
-        searchQueryBuilder.withQuery(QueryBuilders.multiMatchQuery(keyword, "enter_person"));
+        searchQueryBuilder.withQuery(QueryBuilders.multiMatchQuery(keyword, "enter_person", "warehouseEntity.name", "productShowEntity.productName"));
 
         //指定分页
         searchQueryBuilder.withPageable(PageRequest.of(pageNum - 1, pageSize));
@@ -91,7 +92,7 @@ public class ProductWarehouseServiceImpl extends ServiceImpl<ProductWarehouseMap
         //设置高亮
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         //设置高亮字段
-        highlightBuilder.field("enter_person");
+        highlightBuilder.field("enter_person").field("warehouseEntity.name").field("productShowEntity.productName");
         //设置高亮标签,如果不设置默认为<em> </em>
         highlightBuilder.preTags("<span style=\"color:red\">").postTags("</span>");
         searchQueryBuilder.withHighlightBuilder(highlightBuilder);
@@ -111,15 +112,6 @@ public class ProductWarehouseServiceImpl extends ServiceImpl<ProductWarehouseMap
 
         searchHitList.forEach(productWarehouseSearchHit -> {
             ProductWarehouse productWarehouse = productWarehouseSearchHit.getContent();
-            //获得高亮信息
-            try {
-                String enterPerson = productWarehouseSearchHit.getHighlightField("enterPerson").get(0);
-                productWarehouse.setEnterPerson(enterPerson);
-            } catch (Exception e) {
-
-            }
-
-
             Integer productShowId = productWarehouse.getProductShow(); // 产品展示id
             ProductShow productShow = productShowMapper.selectById(productShowId);
             productWarehouse.setProductShowEntity(productShow);
@@ -127,6 +119,32 @@ public class ProductWarehouseServiceImpl extends ServiceImpl<ProductWarehouseMap
             Integer warehouseId = productWarehouse.getWarehouseId(); // 仓库id
             Warehouse warehouse = warehouseMapper.selectById(warehouseId);
             productWarehouse.setWarehouseEntity(warehouse);
+            System.out.println("获得高亮信息前：" + productWarehouse);
+
+            //获得高亮信息
+            try {
+                String enterPerson = productWarehouseSearchHit.getHighlightField("enterPerson").get(0);
+                productWarehouse.setEnterPerson(enterPerson);
+                System.out.println("66666666666666666");
+            } catch (Exception e) {
+
+            }
+            try {
+                String warehouseEntityName = productWarehouseSearchHit.getHighlightField("warehouseEntity.name").get(0);
+                productWarehouse.getWarehouseEntity().setName(warehouseEntityName);
+                System.out.println("111111111111");
+
+            } catch (Exception e) {
+            }
+            try {
+                String productShowEntityProductName = productWarehouseSearchHit.getHighlightField("productShowEntity.productName").get(0);
+                productWarehouse.getProductShowEntity().setProductName(productShowEntityProductName);
+                System.out.println("22222222222");
+
+            } catch (Exception e) {
+
+            }
+            System.out.println("获得高亮信息后：" + productWarehouse);
 
             productWarehouses.add(productWarehouse);
         });
