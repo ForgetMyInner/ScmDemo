@@ -9,6 +9,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 public interface ProductWarehouseRepository extends ElasticsearchRepository<ProductWarehouse, Integer> {
 
-
     Page<ProductWarehouse> findAllByEnterPersonLike(String keyword, Pageable pageable);
 }
