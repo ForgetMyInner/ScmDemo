@@ -6,9 +6,7 @@ import com.wanmait.scmdemo.service.ProductSupplierService;
 import com.wanmait.scmdemo.service.SupplierService;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +32,15 @@ public class ProductSupplierController {
     @Autowired
     private SupplierService supplierService;
 
+
+//    @PostMapping("/add")
+//    public AjaxResult addProductSupplier(@RequestBody ProductSupplier productSupplier){
+//        ProductSupplier productSupplier1 =new ProductSupplier();
+//
+//
+//        productSupplierService.save(productSupplier1);
+//        return AjaxResult.success("添加成功");
+//    }
 
     @GetMapping("SupplierProductList")
     public AjaxResult SupplierProductList(){
