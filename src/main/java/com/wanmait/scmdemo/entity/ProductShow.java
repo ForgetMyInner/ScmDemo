@@ -69,7 +69,7 @@ public class ProductShow {
     /**
      * 产品图片id
      */
-    private Integer productImgsId;
+    private String productImgsId;
 
     /**
      * 产品赠送权限

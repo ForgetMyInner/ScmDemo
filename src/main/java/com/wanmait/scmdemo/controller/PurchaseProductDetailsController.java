@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.baomidou.mybatisplus.generator.config.OutputFile.service;
+
 @RestController
 @RequestMapping("/manage/purchaseProductDetails")
 public class PurchaseProductDetailsController {
@@ -88,11 +90,6 @@ public class PurchaseProductDetailsController {
             supplierWrapper.eq(Supplier::getId, productSupplier.getSupplierId());
             Supplier supplier = supplierService.getOne(supplierWrapper);
 
-            // 仓库表
-            LambdaQueryWrapper<Warehouse> warehouseWrapper = new LambdaQueryWrapper<>();
-            warehouseWrapper.eq(Warehouse::getId, productWarehouse.getWarehouseId());
-            Warehouse warehouse = warehouseService.getOne(warehouseWrapper);
-
             // 采购申请表
             LambdaQueryWrapper<PurchaseApply> purchaseApplyWrapper = new LambdaQueryWrapper<>();
             purchaseApplyWrapper.eq(PurchaseApply::getId, details.getPurchaseApplyId());
@@ -102,6 +99,12 @@ public class PurchaseProductDetailsController {
             LambdaQueryWrapper<Employee> employeeWrapper = new LambdaQueryWrapper<>();
             employeeWrapper.eq(Employee::getId, purchaseApply.getEmployeeId());
             Employee employee = employeeService.getOne(employeeWrapper);
+
+            // 仓库表
+            LambdaQueryWrapper<Warehouse> warehouseWrapper = new LambdaQueryWrapper<>();
+            warehouseWrapper.eq(Warehouse::getId, purchaseApply.getWarehouseId());
+            Warehouse warehouse = warehouseService.getOne(warehouseWrapper);
+
 
             // 部门表
             if (employee != null) {
@@ -159,7 +162,12 @@ public class PurchaseProductDetailsController {
         resultPage.setRecords(purchaseNeedPoolDTOList);
         return AjaxResult.success("查询成功", resultPage);
     }
-
+    @DeleteMapping("/batchDelete")
+    public void batchDelete(@RequestBody List<Long> ids) {
+        LambdaQueryWrapper<PurchaseProductDetails> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(PurchaseProductDetails::getId, ids);
+        purchaseProductDetailsService.remove(wrapper);
+    }
     @GetMapping("displayed")
     public AjaxResult displayed() {
         purchaseProductDetailsService.list();
