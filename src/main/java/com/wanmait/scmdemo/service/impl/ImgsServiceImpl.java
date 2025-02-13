@@ -46,4 +46,11 @@ public class ImgsServiceImpl extends ServiceImpl<ImgsMapper, Imgs> implements Im
     public boolean saveOrUpdateBatch(List<Imgs> entityList, int batchSize) {
         return super.saveOrUpdateBatch(entityList, batchSize);
     }
+
+    @Override
+    public List<Imgs> getImgsByPid(Integer pid) {
+        return imgsMapper.selectByPid(pid);
+    }
+
+
 }

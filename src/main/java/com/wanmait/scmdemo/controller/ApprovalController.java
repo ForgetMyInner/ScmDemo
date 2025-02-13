@@ -1,13 +1,12 @@
 package com.wanmait.scmdemo.controller;
 
 import com.wanmait.scmdemo.entity.Approval;
+import com.wanmait.scmdemo.entity.Warehouse;
 import com.wanmait.scmdemo.mapper.ApprovalMapper;
 import com.wanmait.scmdemo.service.ApprovalService;
 import com.wanmait.scmdemo.util.AjaxResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -37,7 +36,7 @@ public class ApprovalController {
 //            System.out.println(approvalService.findSupplierWaitSignApprovalList());
             return AjaxResult.success("查询成功").put("name","mazihao").put("approvalSignWaitList",approvalService.findSupplierWaitSignApprovalList());
     }
-
-
-
 }
+
+
+
