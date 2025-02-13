@@ -47,6 +47,10 @@ public class WarehouseController {
         return AjaxResult.success("添加成功",warehouse);
     }
 
+    @GetMapping("/check")
+    public List<Warehouse> getWarehouseList() {
+        return warehouseService.getWarehouseList();
+    }
     //查询仓库
     @GetMapping("/list")
     public AjaxResult list()

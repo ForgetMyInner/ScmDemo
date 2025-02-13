@@ -2,6 +2,7 @@ package com.wanmait.scmdemo.mapper;
 
 import com.wanmait.scmdemo.entity.Warehouse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @author wanmait
  * @since 2024-11-26
  */
+@Mapper
 public interface WarehouseMapper extends BaseMapper<Warehouse> {
 
     List<Warehouse> findAll();

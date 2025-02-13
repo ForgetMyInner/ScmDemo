@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 /**
  * <p>
@@ -67,10 +68,20 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
         contactinfo.setSupplierId(id);
         contactinfoMapper.insert(contactinfo);
         Integer id1 = contactinfo.getId();
+        
         //附件信息
-        Attachment attachment = dto.getAttachment();
-        attachment.setSupplierId(id);
-        attachmentMapper.insert(attachment);
+        Optional<Attachment> optionalAttachment = Optional.ofNullable(dto.getAttachment());
+        optionalAttachment.ifPresent(attachment -> {
+            attachment.setSupplierId(id);
+            if (attachmentMapper != null) {
+                attachmentMapper.insert(attachment);
+            } else {
+                throw new IllegalStateException("attachmentMapper is not injected properly");
+            }
+        });
+//        Attachment attachment = dto.getAttachment();
+//        attachment.setSupplierId(id);
+//        attachmentMapper.insert(attachment);
         return AjaxResult.success("成功录入");
     }
 

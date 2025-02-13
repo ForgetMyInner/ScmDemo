@@ -28,5 +28,7 @@ public interface WarehouseService extends IService<Warehouse> {
 
     //添加仓库
 
+    List<Warehouse> getWarehouseList();
+
 
 }
