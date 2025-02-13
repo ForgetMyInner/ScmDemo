@@ -2,6 +2,8 @@ package com.wanmait.scmdemo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.wanmait.scmdemo.controller.CustomStringDeserializer;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,5 +47,6 @@ public class Attachment {
     /**
      * 证书文件
      */
+    @JsonDeserialize(using = CustomStringDeserializer.class)
     private String upFileName;
 }

@@ -29,6 +29,11 @@ public class WarehouseServiceImpl extends ServiceImpl<WarehouseMapper, Warehouse
     @Resource
     private WarehouseMapper warehouseMapper;
 
+    @Override
+    public List<Warehouse> getWarehouseList(){
+        return this.list();
+    }
+
     //听课测试创建
     @Override
     public PageInfo<Warehouse> list(int pageNum, int pageSize) {
