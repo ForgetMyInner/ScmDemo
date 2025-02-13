@@ -36,53 +36,6 @@ public class ApprovalController {
 //            System.out.println(approvalService.findSupplierWaitSignApprovalList());
             return AjaxResult.success("查询成功").put("name","mazihao").put("approvalSignWaitList",approvalService.findSupplierWaitSignApprovalList());
     }
-
-    @GetMapping("/waitSignList")
-    public AjaxResult waitSignList(){
-        if (approvalService.findWaitSignList()!=null){
-            return AjaxResult.success("查询成功").put("name","Tong").put("waitApprovalenterSignSupplier",approvalService.findWaitSignList());
-        }
-        return null;
-    }
-    @PutMapping("/updateApprovalByAimId")
-    public AjaxResult updateApprovalByAimId(@RequestBody Approval approval) {
-        if (approval.getAimId() == null) {
-            return AjaxResult.error("aimId 不能为空");
-        }
-        approval.setSymbol(2);
-        approval.setStatus(false);
-        boolean success = approvalService.updateApprovalByAimId(approval.getAimId(), approval);
-        if (success) {
-            return AjaxResult.success("更新成功");
-        } else {
-            return AjaxResult.error("更新失败");
-        }
-    }
-    @PutMapping("/submitApproval")
-    public AjaxResult submitApprovalForm(@RequestBody Approval approval) {
-        if (approval.getAimId() == null) {
-            return AjaxResult.error("aimId 不能为空");
-        }
-        approval.setSymbol(2);
-        approval.setStatus(true);
-        System.out.println("11111111111111");
-        System.out.println(approval);
-        System.out.println("2222222222222");
-        boolean success = approvalService.updateApprovalByAimId(approval.getAimId(), approval);
-        if (success) {
-            return AjaxResult.success("提交审批成功");
-        } else {
-            return AjaxResult.error("提交审批失败");
-        }
-    }
-
-    @GetMapping("/waitApprovalSupplierSignList")
-    public AjaxResult waitApprovalSupplierSignList(){
-        if (approvalService.findWaitApprovalSupplierSignList()!=null){
-            return AjaxResult.success("查询成功").put("name","Tong").put("waitApprovalSupplierSignList",approvalService.findWaitApprovalSupplierSignList());
-        }
-        return null;
-    }
 }
 
 
