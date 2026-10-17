@@ -43,7 +43,10 @@ public class SupplierController {
 
 
     //查询所有
-
+    @PostMapping("allSuppliers")
+    public AjaxResult suppliersList(){
+        return AjaxResult.success("success").put("suppliers",supplierService.list());
+    }
     @PostMapping("list")
     public AjaxResult list(@RequestBody Supplier supplier, Integer pageNum,Integer pageSize){
         if(pageNum==null){

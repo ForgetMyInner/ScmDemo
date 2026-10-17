@@ -28,5 +28,15 @@ public class PurchaseOrderController {
     {
         return AjaxResult.success("查询成功").put("name","tongjilei").put("purchaseOrderList",purchaseOrderService.list());
     }
+    //查询所有员工
+    @GetMapping("/list2")
+    public AjaxResult listby()
+    {
+
+        return AjaxResult.success("查询成功",purchaseOrderService.list());
+    }
+
+
+
 
 }

@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.wanmait.scmdemo.entity.Approval;
+import com.wanmait.scmdemo.entity.Supplier;
 import com.wanmait.scmdemo.entity.SupplierSign;
 import com.wanmait.scmdemo.entity.Warehouse;
 import com.wanmait.scmdemo.service.ApprovalService;
+import com.wanmait.scmdemo.service.SupplierService;
 import com.wanmait.scmdemo.service.SupplierSignService;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.apache.commons.io.FilenameUtils;
@@ -41,14 +43,16 @@ public class SupplierSignController {
     private SupplierSignService supplierSignService;
     @Resource
     private ApprovalService approvalService;
+    @Resource
+    private SupplierService supplierService;
 
     //供应商签约添加
     @PostMapping("/add")
     public AjaxResult add( @RequestBody Map<String, Object> approvalData)
     {
         Integer supplierId = (Integer) approvalData.get("supplierId");
-        String startTime = (String) approvalData.get("startTime");
-        String endTime = (String) approvalData.get("endTime");
+        String startTime =approvalData.get("startTime")+ "T00:00:00+08:00";;
+        String endTime =approvalData.get("endTime")+ "T00:00:00+08:00";;
         String settlementPeriod = (String) approvalData.get("settlementPeriod");
         Integer creditLimit = (Integer) approvalData.get("creditLimit");
         String creditLimit1="creditLimit";
@@ -77,6 +81,8 @@ public class SupplierSignController {
             updateWrapper.set(Approval::getStatus, true)
                     .set(Approval::getTime, approvalTimeDate)
                     .set(Approval::getUserinfoId, approvalId);
+            Supplier supplier = supplierService.getById(supplierId).setSupplierState("合格供应商");
+            supplierService.updateById(supplier);
         }else {
             updateWrapper.set(Approval::getStatus, true)
                     .set(Approval::getTime, approvalTimeDate)

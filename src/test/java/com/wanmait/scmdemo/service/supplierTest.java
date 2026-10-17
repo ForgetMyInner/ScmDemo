@@ -1,28 +1,22 @@
 package com.wanmait.scmdemo.service;
 
-import com.wanmait.scmdemo.entity.ProductSupplier;
+import com.wanmait.scmdemo.entity.Supplier;
 import com.wanmait.scmdemo.util.AjaxResult;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.TreeSet;
+
 
 @SpringBootTest
 public class supplierTest {
     @Resource
     private SupplierService supplierService;
-    @Autowired
-    private ProductSupplierService productSupplierService;
-    @Autowired
-    private ProductShowService productShowService;
-    @Autowired
-    private WarehouseService warehouseService;
-
+    @Resource
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
 //    @Test
 //    public void testSupplierReg(){
@@ -32,33 +26,45 @@ public class supplierTest {
 //    }
     @Test
     public void setProductSupplierServiceTest(){
-        List<ProductSupplier> list = productSupplierService.list();
-        List<Integer> productShowIds = list.stream()
-                .map(ProductSupplier::getProductShowId)
-                .collect(Collectors.toList());
-        List<Integer> SupplierIds = list.stream()
-                .map(ProductSupplier::getSupplierId)
-                .collect(Collectors.toList());
-//        System.out.println(productShowService.listByIds(productShowIds));
-//        System.out.println(supplierService.listByIds(SupplierIds));
-        List<?> productShows = productShowService.listByIds(productShowIds);
-        List<?> suppliers = supplierService.listByIds(SupplierIds);
+        String s1="hello";
+        String s2=new String("hello");
+        System.out.println(s1.equals(s2));
+    }
+    @Resource
+    private AttachmentService attachmentService;
+    @Test
+    public void testSupplierReg(){
+//        Supplier supplier=new Supplier();
+//        supplier.setSupplierName("钢");
+////        System.out.println(supplierService.list());
+//        System.out.println("sss"+supplierService.supplierWithAttachAndContact(supplier,1, 2));
+////        AjaxResult bySupplierState = supplierService.findBySupplierState();
+//        System.out.println(bySupplierState);
+        //创建一个TreeSet:
+        TreeSet<Integer> ts = new TreeSet<>();
+        ts.add(12);
+        ts.add(3);
+        ts.add(7);
+        ts.add(9);
+        ts.add(3);
+        ts.add(16);
+        ts.add(5);
+        System.out.println(ts.size());
+        System.out.println(ts);
 
-        Map<String, Object> result = new HashMap<>();
-        result.put("productShows", productShows);
-        result.put("suppliers", suppliers);
-
-        System.out.println(result);
     }
     @Test
-    public void setProductSupplierServiceTest2(){
-        List<ProductSupplier> list = productSupplierService.list();
-        list.forEach(System.out::println);
-    }
-    @Test
-    public void setProductSupplierServiceTest3(){
-        System.out.println(warehouseService.list());
-    }
+    public void testEs() {
+//        Supplier supplier=new Supplier();
+//        supplier.setSupplierName("钢");
+////        System.out.println(supplierService.list());
+//        System.out.println("sss"+supplierService.supplierWithAttachAndContact(supplier,1, 2));
+////        AjaxResult bySupplierState = supplierService.findBySupplierState();
+//        System.out.println(bySupplierState);
+//
+//        elasticsearchRestTemplate.indexOps(Supplier.class).putMapping();
+//        System.out.println(supplierService.list());
 
-
+    }
+    
 }

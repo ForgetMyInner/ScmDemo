@@ -2,6 +2,7 @@ package com.wanmait.scmdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanmait.scmdemo.entity.Approval;
+import com.wanmait.scmdemo.entity.PurchaseApply;
 import com.wanmait.scmdemo.entity.Supplier;
 import com.wanmait.scmdemo.mapper.ApprovalMapper;
 import com.wanmait.scmdemo.mapper.SupplierMapper;
@@ -77,5 +78,10 @@ public class ApprovalServiceImpl extends ServiceImpl<ApprovalMapper, Approval> i
             // 返回一个空列表而不是null
             return Collections.emptyList();
         }
+    }
+    //采购申请审批
+    @Override
+    public List<PurchaseApply> findwaitApprovalPurchaseApplys() {
+        return null;
     }
 }

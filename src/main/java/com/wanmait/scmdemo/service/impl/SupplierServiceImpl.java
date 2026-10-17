@@ -50,7 +50,7 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
     @Override
     public AjaxResult register(SupplierDTO dto) {
         //获取操作管理员
-        ServletRequestAttributes requestAttributes=(ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
+         ServletRequestAttributes requestAttributes=(ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
         Admin admin = (Admin) request.getAttribute("admin");
         //供应商准入注册

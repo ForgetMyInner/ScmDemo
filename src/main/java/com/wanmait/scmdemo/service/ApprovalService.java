@@ -2,6 +2,7 @@ package com.wanmait.scmdemo.service;
 
 import com.wanmait.scmdemo.entity.Approval;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wanmait.scmdemo.entity.PurchaseApply;
 import com.wanmait.scmdemo.entity.Supplier;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface ApprovalService extends IService<Approval> {
     List<Supplier> findWaitApprovalList();
 
     List<Supplier> findSupplierWaitSignApprovalList();
+
+    List<PurchaseApply> findwaitApprovalPurchaseApplys();
 }

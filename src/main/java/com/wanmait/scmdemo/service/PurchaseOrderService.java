@@ -20,6 +20,8 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/manage/purchaseOrder")
 public interface PurchaseOrderService extends IService<PurchaseOrder> {
+    AjaxResult getAllOrder();
+
 
 
 

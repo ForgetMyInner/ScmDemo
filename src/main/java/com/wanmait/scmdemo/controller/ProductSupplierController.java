@@ -25,12 +25,12 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/manage/productSupplier")
 public class ProductSupplierController {
-    @Autowired
-    private ProductSupplierService productSupplierService;
-    @Autowired
-    private ProductShowService productShowService;
-    @Autowired
-    private SupplierService supplierService;
+//    @Autowired
+//    private ProductSupplierService productSupplierService;
+//    @Autowired
+//    private ProductShowService productShowService;
+//    @Autowired
+//    private SupplierService supplierService;
 
 
 //    @PostMapping("/add")
@@ -41,10 +41,10 @@ public class ProductSupplierController {
 //        productSupplierService.save(productSupplier1);
 //        return AjaxResult.success("添加成功");
 //    }
-
-    @GetMapping("SupplierProductList")
-    public AjaxResult SupplierProductList(){
-
-        return AjaxResult.success(productSupplierService.list());
-    }
+//
+//    @GetMapping("SupplierProductList")
+//    public AjaxResult SupplierProductList(){
+//
+//        return AjaxResult.success(productSupplierService.list());
+//    }
 }
